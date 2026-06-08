@@ -1,21 +1,32 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+const FINE_POINTER = '(hover: hover) and (pointer: fine)'
 
 /**
  * AnimatedCursor
  * Cursore custom brutalist: un dot che segue il mouse 1:1 e un anello
  * che lo insegue con easing. Si ingrandisce sugli elementi interattivi.
  *
- * - Attivo solo su dispositivi con puntatore fine (hover: hover).
- * - Nessuna libreria esterna: requestAnimationFrame + listener nativi.
+ * - Attivo solo su dispositivi con puntatore fine (mouse/trackpad).
+ * - Su touch non monta alcun elemento DOM.
  */
 export default function AnimatedCursor() {
   const dotRef = useRef(null)
   const ringRef = useRef(null)
+  const [enabled, setEnabled] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(FINE_POINTER).matches,
+  )
+
+  // Aggiorna se cambia input (es. tablet con mouse esterno)
+  useEffect(() => {
+    const mq = window.matchMedia(FINE_POINTER)
+    const onChange = (e) => setEnabled(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
   useEffect(() => {
-    const fine =
-      window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches
-    if (!fine) return
+    if (!enabled) return
 
     const dot = dotRef.current
     const ring = ringRef.current
@@ -23,7 +34,6 @@ export default function AnimatedCursor() {
 
     document.body.classList.add('has-custom-cursor')
 
-    // Posizioni: target (mouse) e correnti (anello con easing)
     const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
     const ringPos = { ...mouse }
     let rafId
@@ -35,7 +45,6 @@ export default function AnimatedCursor() {
     }
 
     const render = () => {
-      // Lerp per l'anello → effetto trascinamento
       ringPos.x += (mouse.x - ringPos.x) * 0.18
       ringPos.y += (mouse.y - ringPos.y) * 0.18
       ring.style.transform = `translate(${ringPos.x}px, ${ringPos.y}px) translate(-50%, -50%)`
@@ -75,7 +84,9 @@ export default function AnimatedCursor() {
       document.removeEventListener('mouseenter', onEnter)
       document.body.classList.remove('has-custom-cursor')
     }
-  }, [])
+  }, [enabled])
+
+  if (!enabled) return null
 
   return (
     <>

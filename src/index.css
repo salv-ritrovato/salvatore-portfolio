@@ -248,7 +248,14 @@ button {
   animation: blink 1s steps(1) infinite;
 }
 
-/* Custom cursor */
+/* Custom cursor — nascosto su touch (fallback se montato nel DOM) */
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
+
 .cursor-dot,
 .cursor-ring {
   position: fixed;
