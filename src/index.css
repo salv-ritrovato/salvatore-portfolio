@@ -1,0 +1,297 @@
+/* ============================================================
+   FONTS — Space Grotesk (display) + Space Mono (mono/body)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   DESIGN TOKENS — Brutalist-tech
+   ============================================================ */
+:root {
+  /* Color — extreme black/white + one neon accent */
+  --color-bg: #0a0a0a;
+  --color-surface: #121212;
+  --color-fg: #f2f2f2;
+  --color-muted: #8c8c8c;
+  --color-accent: #ccff00; /* acid lime — the only neon */
+  --color-accent-dim: #9bc400;
+  --color-border: #f2f2f2;
+
+  /* Typography */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+
+  /* Structure */
+  --border-w: 2px;
+  --radius: 0px; /* brutalism = no rounded corners */
+  --maxw: 1280px;
+  --gutter: clamp(1rem, 4vw, 4rem);
+
+  /* Motion */
+  --ease-brutal: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.18s;
+  --dur: 0.45s;
+  --dur-slow: 0.8s;
+
+  color-scheme: dark;
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle technical grid behind everything */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(242, 242, 242, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242, 242, 242, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #0a0a0a;
+}
+
+/* Brutalist scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-fg);
+  border: 3px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Hide native cursor on devices that support the custom one */
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button {
+    cursor: none;
+  }
+}
+
+/* ============================================================
+   REUSABLE PRIMITIVES
+   ============================================================ */
+.container-x {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  position: relative;
+  z-index: 1;
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* Animated focus ring for keyboard users */
+:focus-visible {
+  outline: var(--border-w) solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   ANIMATIONS — global keyframes (no external libs)
+   ============================================================ */
+
+/* Scroll reveal base + states (driven by useScrollReveal) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity var(--dur) var(--ease-brutal),
+    transform var(--dur) var(--ease-brutal);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glitch text (Hero name) */
+@keyframes glitch-shift {
+  0%, 92%, 100% { transform: translate(0, 0); }
+  93% { transform: translate(-3px, 1px); }
+  95% { transform: translate(3px, -1px); }
+  97% { transform: translate(-2px, -2px); }
+  99% { transform: translate(2px, 2px); }
+}
+@keyframes glitch-clip {
+  0%, 92%, 100% { clip-path: inset(0 0 0 0); }
+  93% { clip-path: inset(20% 0 40% 0); }
+  95% { clip-path: inset(60% 0 5% 0); }
+  97% { clip-path: inset(10% 0 70% 0); }
+  99% { clip-path: inset(45% 0 30% 0); }
+}
+
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.glitch::before {
+  color: var(--color-accent);
+  animation: glitch-clip 4s steps(2) infinite,
+    glitch-shift 4s steps(2) infinite;
+  mix-blend-mode: screen;
+  transform: translate(-2px, 0);
+}
+.glitch::after {
+  color: #ff0033;
+  animation: glitch-clip 3.3s steps(2) infinite reverse,
+    glitch-shift 3.3s steps(2) infinite reverse;
+  mix-blend-mode: screen;
+  transform: translate(2px, 0);
+}
+
+/* Marquee strip */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 22s linear infinite;
+}
+
+/* Slow background shimmer for the accent blob */
+@keyframes float-blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(4%, -6%) scale(1.08); }
+}
+
+/* Blinking caret */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.caret {
+  display: inline-block;
+  width: 0.6ch;
+  background: var(--color-accent);
+  animation: blink 1s steps(1) infinite;
+}
+
+/* Custom cursor */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-fg);
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  width: 38px;
+  height: 38px;
+  border: var(--border-w) solid var(--color-fg);
+  transform: translate(-50%, -50%);
+  transition:
+    width var(--dur-fast) var(--ease-brutal),
+    height var(--dur-fast) var(--ease-brutal),
+    background var(--dur-fast) var(--ease-brutal),
+    border-color var(--dur-fast) var(--ease-brutal);
+}
+.cursor-ring.is-hovering {
+  width: 64px;
+  height: 64px;
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
