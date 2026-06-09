@@ -123,7 +123,7 @@ export const projects = {
       number: '02',
       title: 'Fitness Gym Mario Tirone',
       description:
-        "Si tratta di un sito showcase per una realtà del bodybuilding locale, completamente responsive e sviluppato in React. Focalizzato su un design d'impatto ed un'esperienza utente fluida, la piattaforma presenta in modo dinamico i servizi, il fondatore e le attrezzature del centro, ottimizzando la conversione dei nuovi iscritti.",
+        "Si tratta di un sito showcase per una realtà del bodybuilding nella città di Sulmona (AQ), completamente fruibile da ogni dispositivo e sviluppato in React. Focalizzato su un design d'impatto ed un'esperienza utente fluida, la piattaforma presenta in modo dinamico i servizi, il fondatore e le attrezzature del centro, ottimizzando la conversione dei nuovi iscritti.",
       tech: ['React', 'JavaScript', 'Tailwind', 'CSS3'],
       links: {
         github: 'https://github.com/salvatore-ritrovato',
