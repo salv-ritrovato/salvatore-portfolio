@@ -115,7 +115,7 @@ export const projects = {
       tech: ['React', 'JavaScript', 'Bootstrap', 'CSS3', 'Node.js', 'Express', 'MySQL'],
       links: {
         github: 'https://github.com/salvatore-ritrovato',
-        demo: 'https://6a21e1f66141755033cc609c--incandescent-seahorse-3f6bb5.netlify.app/',
+        demo: 'https://gamify-store.vercel.app/',
       },
     },
     {
