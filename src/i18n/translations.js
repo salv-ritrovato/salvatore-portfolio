@@ -432,6 +432,9 @@ export const translations = {
     notFound: {
       lede: "Sei finito in una parte del sito che non è mai stata costruita. Qui non c'è niente — e non c'è mai stato.",
       home: "torna alla home",
+      whisper1: "non dovevi trovarti qui.",
+      whisper2: "perché sei ancora qui?",
+      titles: ["torna indietro", "404", "sei ancora lì?", "ti vedo"],
     },
   },
 
@@ -756,6 +759,9 @@ export const translations = {
     notFound: {
       lede: "You've reached a part of the site that was never built. There's nothing here — and there never was.",
       home: "return home",
+      whisper1: "you weren't meant to find this.",
+      whisper2: "why are you still here?",
+      titles: ["go back", "404", "still there?", "i see you"],
     },
   },
 };

@@ -472,6 +472,85 @@ button {
 }
 .notfound__home:hover .notfound__arrow { transform: translateX(-4px); }
 
+/* ============================================================
+   404 — easter egg horror (escalation stage 0→3)
+   ============================================================ */
+
+/* Figura all'orizzonte — un'assenza più che una presenza */
+.notfound__figure {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  width: 70px;
+  height: 210px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse 45% 55% at 50% 30%,
+    #050505 35%, rgba(5, 5, 5, 0) 72%);
+  filter: blur(7px);
+  box-shadow: 0 0 60px 20px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  transition: opacity 2.6s var(--ease-brutal);
+  pointer-events: none;
+  z-index: 1;
+}
+.notfound--s3 .notfound__figure {
+  opacity: 0.95;
+  animation: nf-sway 5s ease-in-out infinite;
+}
+@keyframes nf-sway {
+  50% { transform: translateX(-50%) translateX(6px) scaleY(1.02); }
+}
+
+/* Neon guasto — due lampi isolati ogni 6s (no strobo) */
+.notfound__flicker {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: #000;
+  opacity: 0;
+}
+.notfound--s2 .notfound__flicker,
+.notfound--s3 .notfound__flicker {
+  animation: nf-flicker 6s steps(1) infinite;
+}
+@keyframes nf-flicker {
+  0%, 46% { opacity: 0; }
+  47% { opacity: 0.5; }
+  48% { opacity: 0; }
+  73% { opacity: 0.6; }
+  74% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Riga extra del log che compare con l'escalation */
+.notfound__log-extra { color: var(--color-accent); }
+.notfound--s3 .notfound__log-extra { color: #ff0033; }
+
+/* Deep void: glitch più nervoso, testo rosso, stanza che si chiude */
+.notfound--s3 .notfound__code { animation: nf-shake 0.4s steps(2) infinite; }
+@keyframes nf-shake {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(2px, -1px); }
+  75% { transform: translate(-1px, -2px); }
+}
+.notfound--s3 .notfound__lede { color: #ff0033; }
+
+.notfound__vignette { transition: background 2.4s var(--ease-brutal); }
+.notfound--s3 .notfound__vignette {
+  background: radial-gradient(ellipse at center,
+    transparent 16%, rgba(0, 0, 0, 0.96) 84%);
+}
+
+/* Sicurezza extra: niente moto se reduced-motion (il tuo reset globale
+   già copre, questo è esplicito per gli elementi del 404) */
+@media (prefers-reduced-motion: reduce) {
+  .notfound__flicker,
+  .notfound--s3 .notfound__code,
+  .notfound--s3 .notfound__figure { animation: none !important; }
+}
+
 /* ---- Reduced motion ----------------------------------------- */
 /* index.css azzera già animazioni/transizioni globali; qui copriamo
    esplicitamente gli elementi specifici del 404. */
