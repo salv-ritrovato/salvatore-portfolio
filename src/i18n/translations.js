@@ -206,6 +206,49 @@ export const translations = {
       connect: 'Collegati',
       copyright: (year, name) => `© ${year} ${name}. Tutti i diritti riservati.`,
     },
+    chatbot: {
+      title: 'Assistente SR',
+      subtitle: 'FAQ · risposte istantanee',
+      openLabel: 'Apri assistente FAQ',
+      closeLabel: 'Chiudi assistente FAQ',
+      placeholder: 'Scrivi una domanda...',
+      sendLabel: 'Invia messaggio',
+      typing: 'sta scrivendo…',
+      quickLabel: 'Domande rapide',
+      quickReplies: [
+        { id: 'about', label: 'Chi sei?' },
+        { id: 'skills', label: 'Stack' },
+        { id: 'projects', label: 'Progetti' },
+        { id: 'contact', label: 'Contatti' },
+        { id: 'availability', label: 'Disponibile?' },
+      ],
+      keywords: {
+        greeting: ['ciao', 'salve', 'buongiorno', 'buonasera', 'hey', 'ehi', 'hello', 'hi'],
+        about: ['chi sei', 'chi e', 'presentati', 'about', 'raccontami', 'profilo', 'sviluppatore'],
+        skills: ['skill', 'stack', 'tecnologie', 'tecnologia', 'linguaggi', 'framework', 'react', 'node', 'mysql'],
+        projects: ['progetti', 'progetto', 'lavori', 'portfolio', 'gamify', 'gym', 'ferraro', 'inlumine', 'demo'],
+        contact: ['contatto', 'contatti', 'email', 'scrivimi', 'linkedin', 'github', 'parlare', 'messaggio'],
+        availability: ['disponibile', 'disponibilita', 'freelance', 'assunto', 'lavoro', 'collaborare', 'assumi'],
+        help: ['aiuto', 'help', 'cosa puoi', 'cosa sai', 'domande'],
+      },
+      responses: {
+        greeting:
+          'Ciao! Sono l’assistente FAQ di Salvatore. Posso parlarti di chi è, del suo stack, dei progetti e di come contattarlo. Prova un pulsante qui sotto o scrivi una domanda.',
+        about: (name, role) =>
+          `${name} è un ${role} focalizzato su front-end moderno e Full Stack JavaScript. Trasforma idee in interfacce rapide, accessibili e curate nei dettagli — dal design all’ingegneria.`,
+        skills: (list) =>
+          `Ecco le tecnologie principali con cui lavora:\n${list}\n\nVuoi approfondire? Scorri la sezione Skills o chiedimi dei progetti.`,
+        projects: (list) =>
+          `Alcuni progetti selezionati:\n${list}\n\nTrovi demo e codice nella sezione Progetti del sito.`,
+        contact: (email, github, linkedin) =>
+          `Puoi contattarlo così:\n• Email: ${email}\n• GitHub: ${github}\n• LinkedIn: ${linkedin}\n\nOppure usa il form nella sezione Contatti.`,
+        availability: (text) => `${text}. Per collaborazioni o opportunità, la sezione Contatti è il modo più diretto.`,
+        help:
+          'Posso rispondere su: chi è Salvatore, stack tecnologico, progetti, disponibilità e contatti. Usa i pulsanti rapidi o scrivi in libertà — es. "quali tecnologie usi?" o "come ti contatto?".',
+        fallback:
+          'Non sono sicuro di aver capito. Prova una domanda rapida qui sotto, oppure chiedi di stack, progetti, contatti o disponibilità.',
+      },
+    },
     ui: {
       navigation: 'Navigazione',
       viewProject: 'Vedi progetto',
@@ -389,6 +432,49 @@ export const translations = {
       navigate: 'Navigate',
       connect: 'Connect',
       copyright: (year, name) => `© ${year} ${name}. All rights reserved.`,
+    },
+    chatbot: {
+      title: 'SR Assistant',
+      subtitle: 'FAQ · instant answers',
+      openLabel: 'Open FAQ assistant',
+      closeLabel: 'Close FAQ assistant',
+      placeholder: 'Type a question...',
+      sendLabel: 'Send message',
+      typing: 'is typing…',
+      quickLabel: 'Quick questions',
+      quickReplies: [
+        { id: 'about', label: 'Who are you?' },
+        { id: 'skills', label: 'Stack' },
+        { id: 'projects', label: 'Projects' },
+        { id: 'contact', label: 'Contact' },
+        { id: 'availability', label: 'Available?' },
+      ],
+      keywords: {
+        greeting: ['hello', 'hi', 'hey', 'good morning', 'good evening', 'ciao', 'howdy'],
+        about: ['who are you', 'about', 'tell me', 'profile', 'developer', 'salvatore'],
+        skills: ['skill', 'stack', 'technologies', 'technology', 'languages', 'framework', 'react', 'node', 'mysql'],
+        projects: ['projects', 'project', 'work', 'portfolio', 'gamify', 'gym', 'ferraro', 'inlumine', 'demo'],
+        contact: ['contact', 'email', 'reach', 'linkedin', 'github', 'message', 'write'],
+        availability: ['available', 'availability', 'freelance', 'hire', 'hiring', 'collaborate', 'job'],
+        help: ['help', 'what can you', 'what do you', 'questions'],
+      },
+      responses: {
+        greeting:
+          'Hi! I’m Salvatore’s FAQ assistant. I can tell you about him, his stack, projects and how to get in touch. Try a quick button below or type a question.',
+        about: (name, role) =>
+          `${name} is a ${role} focused on modern front-end and Full Stack JavaScript. He turns ideas into fast, accessible interfaces with obsessive attention to detail — from design to engineering.`,
+        skills: (list) =>
+          `Here are the main technologies he works with:\n${list}\n\nWant more detail? Check the Skills section or ask me about projects.`,
+        projects: (list) =>
+          `Selected projects:\n${list}\n\nYou’ll find demos and code in the Projects section.`,
+        contact: (email, github, linkedin) =>
+          `You can reach him here:\n• Email: ${email}\n• GitHub: ${github}\n• LinkedIn: ${linkedin}\n\nOr use the contact form on this site.`,
+        availability: (text) => `${text}. For collaborations or opportunities, the Contact section is the fastest way to reach out.`,
+        help:
+          'I can answer questions about: who Salvatore is, his tech stack, projects, availability and contact info. Use the quick buttons or type freely — e.g. "what technologies do you use?" or "how can I contact you?".',
+        fallback:
+          'I’m not sure I understood. Try a quick button below, or ask about stack, projects, contact or availability.',
+      },
     },
     ui: {
       navigation: 'Navigation',

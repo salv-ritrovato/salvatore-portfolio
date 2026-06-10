@@ -1,4 +1,5 @@
 import AnimatedCursor from './components/ui/AnimatedCursor'
+import FaqChatbot from './components/ui/FaqChatbot'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import BackToTop from './components/layout/BackToTop'
@@ -21,6 +22,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <FaqChatbot />
       <BackToTop />
     </>
   )
