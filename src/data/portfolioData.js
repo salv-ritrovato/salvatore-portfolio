@@ -89,7 +89,7 @@ export const skills = {
     { id: 'html', name: 'HTML5', glyph: '</>', category: 'Markup', level: 90 },
     { id: 'css', name: 'CSS3', glyph: '#', category: 'Style', level: 87 },
     { id: 'js', name: 'JavaScript', glyph: 'JS', category: 'Language', level: 72 },
-    { id: 'react', name: 'React.js', glyph: '⚛', category: 'Framework', level: 68 },
+    { id: 'react', name: 'React.js', glyph: 'Re', category: 'Framework', level: 68 },
     { id: 'node', name: 'Node.js', glyph: 'N', category: 'Runtime', level: 60 },
     { id: 'express', name: 'Express.js', glyph: 'Ex', category: 'Backend', level: 58 },
     { id: 'mysql', name: 'MySQL', glyph: 'DB', category: 'Database', level: 55 },
