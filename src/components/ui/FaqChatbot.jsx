@@ -9,7 +9,7 @@ function BotMessage({ text }) {
   return (
     <div className="flex justify-start">
       <div className="max-w-[90%] border-2 border-line/30 bg-surface px-4 py-3 font-mono text-sm leading-relaxed text-fg whitespace-pre-line break-all">
-        <span className="mono-label mb-2 block text-accent">SR</span>
+        <span className="mono-label mb-2 block text-accent">Zeno</span>
         {text}
       </div>
     </div>
