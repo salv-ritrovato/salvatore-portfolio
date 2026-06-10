@@ -26,12 +26,14 @@ const shared = {
     p2: ['React', 'JavaScript', 'Tailwind', 'CSS3'],
     p3: ['React', 'JavaScript', 'Tailwind', 'CSS3'],
     p4: ['React', 'Tailwind', 'CSS3'],
+    p5: ['React', 'JavaScript', 'CSS3', 'Tailwind'],
   },
   projectLinks: {
-    p1: { github: 'https://github.com/salvatore-ritrovato', demo: 'https://gamify-store.vercel.app/' },
-    p2: { github: 'https://github.com/salvatore-ritrovato', demo: 'https://fitness-gym-tirone.vercel.app/' },
-    p3: { github: 'https://github.com/salvatore-ritrovato', demo: 'https://studio-ferraro.vercel.app/' },
-    p4: { github: 'https://github.com/salvatore-ritrovato', demo: '#' },
+    p1: { github: 'https://github.com/salv-ritrovato/gamify', demo: 'https://gamify-store.vercel.app/' },
+    p2: { github: 'https://github.com/salv-ritrovato/fitness-gym-tirone', demo: 'https://fitness-gym-tirone.vercel.app/' },
+    p3: { github: 'https://github.com/salv-ritrovato/studio-ferraro', demo: 'https://studio-ferraro.vercel.app/' },
+    p4: { github: 'https://github.com/salv-ritrovato/salvatore-portfolio', demo: '#' },
+    p5: { github: 'https://github.com/salv-ritrovato/inlumine-studio', demo: 'https://inlumine-studio.vercel.app/' },
   },
 }
 
@@ -149,6 +151,16 @@ export const translations = {
           tech: shared.projectTech.p4,
           links: shared.projectLinks.p4,
         },
+        {
+          id: 'p5',
+          number: '05',
+          title: 'inLumine Studio',
+          featured: true,
+          description:
+            'Il progetto grafico di inLumine Studio rappresenta una delle sfide visive più ambiziose e stimolanti, nato dall’incontro creativo e dalla sinergia professionale con uno dei colleghi dell’agenzia. L’obiettivo principale dell’identità visiva è tradurre in segni e colori il concetto stesso di “luce” e innovazione. Il design si sviluppa attorno a un linguaggio visivo moderno, pulito e d’impatto, capace di comunicare solidità strategica e, al tempo stesso, una forte propensione al futuro e alla creatività digitale. Ogni elemento grafico è stato studiato per posizionare il brand come un punto di riferimento autorevole nel settore dello sviluppo e della strategia digitale.',
+          tech: shared.projectTech.p5,
+          links: shared.projectLinks.p5,
+        },
       ],
     },
     contact: {
@@ -203,6 +215,7 @@ export const translations = {
       navDialog: 'Menu di navigazione',
       projectOnGithub: (title) => `${title} su GitHub`,
       projectDemo: (title) => `Demo di ${title}`,
+      featuredLabel: 'Progetto di punta',
       languageSwitch: 'Cambia lingua',
       langIt: 'Italiano',
       langEn: 'English',
@@ -322,6 +335,16 @@ export const translations = {
           tech: shared.projectTech.p4,
           links: shared.projectLinks.p4,
         },
+        {
+          id: 'p5',
+          number: '05',
+          title: 'inLumine Studio',
+          featured: true,
+          description:
+            'The visual design of inLumine Studio is one of my most ambitious and rewarding visual challenges, born from a creative meeting and professional synergy with one of the agency’s colleagues. The core goal of the visual identity is to translate the very concept of “light” and innovation into signs and colors. The design revolves around a modern, clean and striking visual language, able to convey strategic solidity while at the same time expressing a strong orientation toward the future and digital creativity. Every graphic element was crafted to position the brand as an authoritative reference point in the digital development and strategy field.',
+          tech: shared.projectTech.p5,
+          links: shared.projectLinks.p5,
+        },
       ],
     },
     contact: {
@@ -376,6 +399,7 @@ export const translations = {
       navDialog: 'Navigation menu',
       projectOnGithub: (title) => `${title} on GitHub`,
       projectDemo: (title) => `${title} demo`,
+      featuredLabel: 'Most ambitious yet',
       languageSwitch: 'Switch language',
       langIt: 'Italian',
       langEn: 'English',

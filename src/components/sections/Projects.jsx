@@ -4,7 +4,7 @@ import SectionHeading from '../ui/SectionHeading'
 import ScrollReveal from '../ui/ScrollReveal'
 import Tag from '../ui/Tag'
 
-function ProjectCard({ project, delay, ui }) {
+function ProjectCard({ project, delay, ui, featured = false }) {
   const cardRef = useRef(null)
 
   const handleMove = (e) => {
@@ -13,10 +13,9 @@ function ProjectCard({ project, delay, ui }) {
     const rect = el.getBoundingClientRect()
     const px = (e.clientX - rect.left) / rect.width
     const py = (e.clientY - rect.top) / rect.height
-    const rotateY = (px - 0.5) * 12
-    const rotateX = (0.5 - py) * 12
-    el.style.setProperty('--rx', `${rotateX}deg`)
-    el.style.setProperty('--ry', `${rotateY}deg`)
+    const intensity = featured ? 6 : 12
+    el.style.setProperty('--rx', `${(0.5 - py) * intensity}deg`)
+    el.style.setProperty('--ry', `${(px - 0.5) * intensity}deg`)
     el.style.setProperty('--mx', `${px * 100}%`)
     el.style.setProperty('--my', `${py * 100}%`)
   }
@@ -28,13 +27,41 @@ function ProjectCard({ project, delay, ui }) {
     el.style.setProperty('--ry', '0deg')
   }
 
+  const iconLinks = (
+    <div className="flex gap-2">
+      <a
+        href={project.links.github}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={ui.projectOnGithub(project.title)}
+        className="grid h-10 w-10 place-items-center border-2 border-line/40 font-mono text-xs font-bold transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+      >
+        GH
+      </a>
+      <a
+        href={project.links.demo}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={ui.projectDemo(project.title)}
+        className="grid h-10 w-10 place-items-center border-2 border-line/40 transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+      >
+        ↗
+      </a>
+    </div>
+  )
+
   return (
-    <ScrollReveal delay={delay} className="[perspective:1200px]">
+    <ScrollReveal
+      delay={delay}
+      className={`[perspective:1200px] ${featured ? 'md:col-span-2' : ''}`}
+    >
       <article
         ref={cardRef}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
-        className="group relative flex h-full flex-col border-2 border-line/40 bg-surface p-7 transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-brutal-accent"
+        className={`group relative flex h-full flex-col border-2 border-line/40 bg-surface transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-brutal-accent ${
+          featured ? 'p-7 sm:p-10' : 'p-7'
+        }`}
         style={{
           transform: 'rotateX(var(--rx,0)) rotateY(var(--ry,0))',
           transformStyle: 'preserve-3d',
@@ -50,58 +77,85 @@ function ProjectCard({ project, delay, ui }) {
           }}
         />
 
-        <div className="mb-6 flex items-start justify-between" style={{ transform: 'translateZ(40px)' }}>
-          <span className="font-display text-5xl font-bold text-line/20 transition-colors duration-300 group-hover:text-accent">
-            {project.number}
-          </span>
-          <div className="flex gap-2">
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={ui.projectOnGithub(project.title)}
-              className="grid h-10 w-10 place-items-center border-2 border-line/40 font-mono text-xs font-bold transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
-            >
-              GH
-            </a>
+        {featured ? (
+          /* ---------- FEATURED: due colonne di testo, niente preview ---------- */
+          <div className="grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-start">
+            {/* Colonna identità */}
+            <div style={{ transform: 'translateZ(30px)' }}>
+              <div className="mb-5 flex items-center gap-4">
+                <span className="font-display text-6xl font-bold leading-none text-accent">
+                  {project.number}
+                </span>
+                <span className="border-2 border-accent px-2 py-1 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-accent">
+                  {ui.featuredLabel}
+                </span>
+              </div>
+              <h3 className="font-display text-3xl font-bold uppercase leading-tight sm:text-4xl">
+                {project.title}
+              </h3>
+            </div>
+
+            {/* Colonna contenuto */}
+            <div className="flex flex-col" style={{ transform: 'translateZ(20px)' }}>
+              <p className="text-sm leading-relaxed text-muted sm:text-base">
+                {project.description}
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                  <Tag key={tech}>{tech}</Tag>
+                ))}
+              </div>
+
+              <div className="mt-7 flex items-center gap-5">
+                <a
+                  href={project.links.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest text-fg transition-colors hover:text-accent"
+                >
+                  {ui.viewProject}
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                </a>
+                {iconLinks}
+              </div>
+            </div>
+          </div>
+        ) : (
+          /* ---------- CARD NORMALE (invariata) ---------- */
+          <>
+            <div className="mb-6 flex items-start justify-between" style={{ transform: 'translateZ(40px)' }}>
+              <span className="font-display text-5xl font-bold text-line/20 transition-colors duration-300 group-hover:text-accent">
+                {project.number}
+              </span>
+              {iconLinks}
+            </div>
+
+            <h3 className="font-display text-2xl font-bold uppercase" style={{ transform: 'translateZ(30px)' }}>
+              {project.title}
+            </h3>
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-muted" style={{ transform: 'translateZ(20px)' }}>
+              {project.description}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-2" style={{ transform: 'translateZ(25px)' }}>
+              {project.tech.map((tech) => (
+                <Tag key={tech}>{tech}</Tag>
+              ))}
+            </div>
+
             <a
               href={project.links.demo}
               target="_blank"
               rel="noreferrer"
-              aria-label={ui.projectDemo(project.title)}
-              className="grid h-10 w-10 place-items-center border-2 border-line/40 transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+              className="mt-7 inline-flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest text-fg transition-colors hover:text-accent"
+              style={{ transform: 'translateZ(35px)' }}
             >
-              ↗
+              {ui.viewProject}
+              <span className="transition-transform group-hover:translate-x-1">→</span>
             </a>
-          </div>
-        </div>
-
-        <h3
-          className="font-display text-2xl font-bold uppercase"
-          style={{ transform: 'translateZ(30px)' }}
-        >
-          {project.title}
-        </h3>
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted" style={{ transform: 'translateZ(20px)' }}>
-          {project.description}
-        </p>
-
-        <div className="mt-6 flex flex-wrap gap-2" style={{ transform: 'translateZ(25px)' }}>
-          {project.tech.map((tech) => (
-            <Tag key={tech}>{tech}</Tag>
-          ))}
-        </div>
-
-        <a
-          href={project.links.demo}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-7 inline-flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest text-fg transition-colors hover:text-accent"
-          style={{ transform: 'translateZ(35px)' }}
-        >
-          {ui.viewProject}
-          <span className="transition-transform group-hover:translate-x-1">→</span>
-        </a>
+          </>
+        )}
       </article>
     </ScrollReveal>
   )
@@ -122,7 +176,13 @@ export default function Projects() {
 
         <div className="mt-16 grid gap-8 md:grid-cols-2">
           {projects.items.map((project, i) => (
-            <ProjectCard key={project.id} project={project} delay={(i % 2) * 120} ui={ui} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              delay={project.featured ? 0 : (i % 2) * 120}
+              ui={ui}
+              featured={Boolean(project.featured)}
+            />
           ))}
         </div>
       </div>
