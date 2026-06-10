@@ -290,6 +290,196 @@ button {
   border-color: var(--color-accent);
 }
 
+/* ============================================================
+   NotFound — 404 liminale/void
+   Solo gli stili SPECIFICI di questa pagina.
+   Token e primitive (.glitch / .caret / .mono-label) arrivano da index.css.
+   ============================================================ */
+
+.notfound {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: var(--gutter);
+  overflow: hidden;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-mono);
+  text-align: center;
+}
+
+/* ---- Pavimento prospettico che scorre nel buio -------------- */
+.notfound__grid {
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  bottom: -10%;
+  top: 50%;
+  perspective: 260px;
+  overflow: hidden;
+  opacity: 0.6;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%, transparent 96%);
+  mask-image: linear-gradient(to bottom, transparent, #000 40%, transparent 96%);
+}
+.notfound__grid::before {
+  content: "";
+  position: absolute;
+  inset: -120% 0 -40% 0;
+  /* stesse linee della griglia tecnica del body, ma più marcate e in prospettiva */
+  background-image:
+    linear-gradient(rgba(242, 242, 242, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242, 242, 242, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  transform: rotateX(74deg);
+  transform-origin: top center;
+  animation: nf-drift 7s linear infinite;
+}
+@keyframes nf-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 0 48px; }
+}
+
+/* ---- Scanline CRT ------------------------------------------- */
+.notfound__scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02) 0,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* ---- Vignettatura ------------------------------------------- */
+.notfound__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+/* ---- Eyebrow (.mono-label fornisce font/colore/spacing) ----- */
+.notfound__eyebrow {
+  position: absolute;
+  top: var(--gutter);
+  left: var(--gutter);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.notfound__pulse {
+  width: 7px;
+  height: 7px;
+  background: var(--color-accent);
+  animation: nf-pulse 1.6s var(--ease-brutal) infinite;
+}
+@keyframes nf-pulse { 50% { opacity: 0.2; } }
+
+/* ---- Coordinate --------------------------------------------- */
+.notfound__coords {
+  position: absolute;
+  top: var(--gutter);
+  right: var(--gutter);
+  z-index: 2;
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--color-muted);
+}
+
+/* ---- Contenuto centrale ------------------------------------- */
+.notfound__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 34rem;
+}
+
+.notfound__code {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(6rem, 26vw, 15rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-fg);
+}
+
+.notfound__lede {
+  margin-top: 1rem;
+  max-width: 26rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+/* ---- Log da terminale --------------------------------------- */
+.notfound__log {
+  width: 100%;
+  max-width: 28rem;
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border: var(--border-w) solid var(--color-muted);
+  background: var(--color-surface);
+  font-size: 0.8rem;
+  line-height: 1.9;
+  text-align: left;
+  color: var(--color-muted);
+}
+.notfound__prompt { margin-right: 0.5ch; color: var(--color-accent); }
+.notfound__path   { color: var(--color-fg); word-break: break-all; }
+.notfound__null   { color: var(--color-fg); }
+.notfound__void   { color: var(--color-accent); }
+/* la .caret globale non ha height: gliela diamo solo qui, senza toccare il resto */
+.notfound__log .caret { height: 1em; vertical-align: -0.15em; }
+
+/* ---- Ritorno ------------------------------------------------ */
+.notfound__home {
+  margin-top: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.6rem;
+  border: var(--border-w) solid var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  transition:
+    background var(--dur-fast) var(--ease-brutal),
+    color var(--dur-fast) var(--ease-brutal);
+}
+.notfound__home:hover,
+.notfound__home:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+.notfound__arrow {
+  display: inline-block;
+  transition: transform var(--dur-fast) var(--ease-brutal);
+}
+.notfound__home:hover .notfound__arrow { transform: translateX(-4px); }
+
+/* ---- Reduced motion ----------------------------------------- */
+/* index.css azzera già animazioni/transizioni globali; qui copriamo
+   esplicitamente gli elementi specifici del 404. */
+@media (prefers-reduced-motion: reduce) {
+  .notfound__grid::before,
+  .notfound__pulse { animation: none; }
+}
+
 /* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

@@ -8,8 +8,21 @@ import About from './components/sections/About'
 import Skills from './components/sections/Skills'
 import Projects from './components/sections/Projects'
 import Contact from './components/sections/Contact'
+import NotFound from './components/pages/NotFound'
 
 export default function App() {
+  const path = window.location.pathname
+  const isRoot = path === '/' || path === '/index.html'
+
+  if (!isRoot) {
+    return (
+      <>
+        <AnimatedCursor />
+        <NotFound />
+      </>
+    )
+  }
+
   return (
     <>
       <AnimatedCursor />
