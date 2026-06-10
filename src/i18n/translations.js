@@ -78,7 +78,7 @@ export const translations = {
         'Costruisco interfacce reattive, pulite e completamente responsive con React e Node. Ossessionato dai dettagli, dall’UX e dalle performance web.',
       marquee: ['HTML5', 'CSS3', 'JAVASCRIPT', 'REACT', 'NODE.JS', 'EXPRESS', 'MYSQL', 'GIT', 'UI / UX', 'PERFORMANCE'],
       ctas: [
-        { id: 'projects', label: 'I miei progetti', href: '#projects', variant: 'primary' },
+        { id: 'projects', label: 'Progetti', href: '#projects', variant: 'primary' },
         { id: 'contact', label: 'Contattami', href: '#contact', variant: 'ghost' },
       ],
     },
@@ -207,7 +207,7 @@ export const translations = {
       copyright: (year, name) => `© ${year} ${name}. Tutti i diritti riservati.`,
     },
     chatbot: {
-      title: 'Assistente SR',
+      title: 'Zeno',
       subtitle: 'FAQ · risposte istantanee',
       openLabel: 'Apri assistente FAQ',
       closeLabel: 'Chiudi assistente FAQ',
@@ -305,7 +305,7 @@ export const translations = {
         'I build reactive, clean and fully responsive interfaces with React and Node. Obsessed with details, UX and web performance.',
       marquee: ['HTML5', 'CSS3', 'JAVASCRIPT', 'REACT', 'NODE.JS', 'EXPRESS', 'MYSQL', 'GIT', 'UI / UX', 'PERFORMANCE'],
       ctas: [
-        { id: 'projects', label: 'My projects', href: '#projects', variant: 'primary' },
+        { id: 'projects', label: 'Projects', href: '#projects', variant: 'primary' },
         { id: 'contact', label: 'Get in touch', href: '#contact', variant: 'ghost' },
       ],
     },
@@ -434,7 +434,7 @@ export const translations = {
       copyright: (year, name) => `© ${year} ${name}. All rights reserved.`,
     },
     chatbot: {
-      title: 'SR Assistant',
+      title: 'Zeno',
       subtitle: 'FAQ · instant answers',
       openLabel: 'Open FAQ assistant',
       closeLabel: 'Close FAQ assistant',
