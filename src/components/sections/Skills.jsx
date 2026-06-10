@@ -1,14 +1,12 @@
-import { skills } from '../../data/portfolioData'
+import { useLanguage } from '../../i18n/LanguageContext'
 import SectionHeading from '../ui/SectionHeading'
 import ScrollReveal from '../ui/ScrollReveal'
 import Tag from '../ui/Tag'
 
-/**
- * Skills
- * Griglia di tecnologie con badge brutalist. Ogni card ha un hover
- * effect (slide del glyph, barra di "padronanza" che si riempie).
- */
 export default function Skills() {
+  const { t } = useLanguage()
+  const { skills } = t
+
   return (
     <section id="skills" className="relative z-10 border-t-2 border-line/20 py-24 sm:py-32">
       <div className="container-x">
@@ -22,7 +20,6 @@ export default function Skills() {
               data-cursor="hover"
               className="group relative cursor-none overflow-hidden bg-bg p-6 transition-colors duration-300 hover:bg-surface"
             >
-              {/* Accent corner */}
               <span className="absolute right-0 top-0 h-0 w-0 border-l-[28px] border-t-[28px] border-l-transparent border-t-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
               <div className="mb-6 flex items-start justify-between">
@@ -34,7 +31,6 @@ export default function Skills() {
 
               <h3 className="font-display text-xl font-bold uppercase">{skill.name}</h3>
 
-              {/* Proficiency bar */}
               <div className="mt-4 h-1.5 w-full bg-line/20">
                 <span
                   className="block h-full origin-left bg-accent transition-transform duration-700 ease-[var(--ease-brutal)]"

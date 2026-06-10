@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { nav } from '../../data/portfolioData'
+import { useLanguage } from '../../i18n/LanguageContext'
+import LanguageSwitch from '../ui/LanguageSwitch'
 
 const DESKTOP_BP = '(min-width: 1024px)'
 
-/**
- * Navbar
- * Sticky con blur backdrop. Evidenzia la sezione attiva tramite
- * Intersection Observer e gestisce un menu mobile/tablet a tutto schermo.
- */
 export default function Navbar() {
+  const { t } = useLanguage()
+  const { nav, ui } = t
+
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState(nav.links[0]?.id)
@@ -18,7 +17,6 @@ export default function Navbar() {
 
   const closeMenu = () => setOpen(false)
 
-  /** Ripristina lo scroll senza animazione (html ha scroll-behavior: smooth). */
   const restoreScrollInstant = (y) => {
     const html = document.documentElement
     const prev = html.style.scrollBehavior
@@ -40,7 +38,6 @@ export default function Navbar() {
     }
   }
 
-  // Stato "scrolled" per restringere e bordare la navbar
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
     onScroll()
@@ -48,7 +45,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Chiudi il menu se si passa a desktop (es. rotazione tablet)
   useEffect(() => {
     const mq = window.matchMedia(DESKTOP_BP)
     const onChange = (e) => {
@@ -58,7 +54,6 @@ export default function Navbar() {
     return () => mq.removeEventListener('change', onChange)
   }, [])
 
-  // Scroll spy (disattivato mentre il menu è aperto)
   useEffect(() => {
     if (open) return
 
@@ -77,9 +72,8 @@ export default function Navbar() {
     )
     sections.forEach((s) => observer.observe(s))
     return () => observer.disconnect()
-  }, [open])
+  }, [open, nav.links])
 
-  // Blocca lo scroll (compatibile iOS)
   useEffect(() => {
     if (!open) return
 
@@ -94,7 +88,6 @@ export default function Navbar() {
     return () => unlockBody()
   }, [open])
 
-  // Chiudi con Escape
   useEffect(() => {
     if (!open) return
     const onKey = (e) => {
@@ -104,7 +97,6 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
-  /** Navigazione mobile/tablet: chiude il menu e scrolla alla sezione. */
   const goTo = (e, href) => {
     e.preventDefault()
     const id = href.replace('#', '')
@@ -133,14 +125,17 @@ export default function Navbar() {
       id="mobile-menu"
       role="dialog"
       aria-modal="true"
-      aria-label="Menu di navigazione"
+      aria-label={ui.navDialog}
       aria-hidden={!open}
       className={`fixed inset-x-0 bottom-0 top-16 z-[90] flex flex-col border-t-2 border-line/20 bg-bg transition-opacity duration-300 lg:hidden ${
         open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
       }`}
     >
       <nav className="flex flex-1 flex-col justify-start overflow-y-auto px-[var(--gutter)] pb-8 pt-6">
-        <p className="mono-label mb-8 text-muted">Navigazione</p>
+        <div className="mb-8 flex items-center justify-between gap-4">
+          <p className="mono-label text-muted">{ui.navigation}</p>
+          <LanguageSwitch />
+        </div>
         <ul className="flex flex-col gap-6">
           {nav.links.map((link, i) => (
             <li key={link.id}>
@@ -175,8 +170,7 @@ export default function Navbar() {
             : 'border-b-2 border-transparent bg-transparent py-5'
         } ${scrolled && !open ? 'backdrop-blur-md bg-bg/90' : ''}`}
       >
-        <nav className="container-x flex items-center justify-between gap-4">
-          {/* Brand */}
+        <nav className="container-x flex items-center justify-between gap-3 sm:gap-4">
           <a
             href="#home"
             onClick={(e) => {
@@ -190,7 +184,6 @@ export default function Navbar() {
             <span className="hidden sm:inline">/portfolio</span>
           </a>
 
-          {/* Desktop links — solo da lg in su (1024px) */}
           <ul className="hidden items-center gap-6 lg:flex xl:gap-8">
             {nav.links.map((link) => (
               <li key={link.id}>
@@ -213,46 +206,48 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Desktop CTA */}
-          <a
-            href={nav.cta.href}
-            className="hidden shrink-0 border-2 border-accent bg-accent px-5 py-2 font-mono text-sm font-bold uppercase tracking-widest text-bg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-brutal-sm lg:inline-block"
-          >
-            {nav.cta.label}
-          </a>
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <LanguageSwitch />
 
-          {/* Toggle hamburger — mobile + tablet (< lg) */}
-          <button
-            type="button"
-            aria-label={open ? 'Chiudi menu' : 'Apri menu'}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            onClick={() => setOpen((v) => !v)}
-            className={`flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-[5px] border-2 bg-bg transition-all duration-200 ease-[var(--ease-brutal)] lg:hidden ${
-              open
-                ? 'border-accent text-accent'
-                : 'border-fg text-fg hover:border-accent hover:text-accent'
-            }`}
-          >
-            <span
-              aria-hidden="true"
-              className={`block h-[2px] w-5 bg-current transition-all duration-300 ease-[var(--ease-brutal)] ${
-                open ? 'translate-y-[7px] rotate-45' : ''
+            <a
+              href={nav.cta.href}
+              className="hidden shrink-0 border-2 border-accent bg-accent px-5 py-2 font-mono text-sm font-bold uppercase tracking-widest text-bg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-brutal-sm lg:inline-block"
+            >
+              {nav.cta.label}
+            </a>
+
+            <button
+              type="button"
+              aria-label={open ? ui.closeMenu : ui.openMenu}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              onClick={() => setOpen((v) => !v)}
+              className={`relative flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-[5px] border-2 bg-bg transition-all duration-200 ease-[var(--ease-brutal)] lg:hidden ${
+                open
+                  ? 'border-accent text-accent'
+                  : 'border-fg text-fg hover:border-accent hover:text-accent'
               }`}
-            />
-            <span
-              aria-hidden="true"
-              className={`block h-[2px] w-5 bg-current transition-all duration-300 ease-[var(--ease-brutal)] ${
-                open ? 'scale-x-0 opacity-0' : ''
-              }`}
-            />
-            <span
-              aria-hidden="true"
-              className={`block h-[2px] w-5 bg-current transition-all duration-300 ease-[var(--ease-brutal)] ${
-                open ? '-translate-y-[7px] -rotate-45' : ''
-              }`}
-            />
-          </button>
+            >
+              <span
+                aria-hidden="true"
+                className={`block h-[2px] w-5 bg-current transition-all duration-300 ease-[var(--ease-brutal)] ${
+                  open ? 'translate-y-[7px] rotate-45' : ''
+                }`}
+              />
+              <span
+                aria-hidden="true"
+                className={`block h-[2px] w-5 bg-current transition-all duration-300 ease-[var(--ease-brutal)] ${
+                  open ? 'scale-x-0 opacity-0' : ''
+                }`}
+              />
+              <span
+                aria-hidden="true"
+                className={`block h-[2px] w-5 bg-current transition-all duration-300 ease-[var(--ease-brutal)] ${
+                  open ? '-translate-y-[7px] -rotate-45' : ''
+                }`}
+              />
+            </button>
+          </div>
         </nav>
       </header>
 

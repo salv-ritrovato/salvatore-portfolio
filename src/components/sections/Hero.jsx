@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
-import { hero } from '../../data/portfolioData'
+import { useLanguage } from '../../i18n/LanguageContext'
 import Button from '../ui/Button'
-
-// Prefisso fisso mostrato accanto al testo che ruota (es. "I am a React Enthusiast").
-const ROLE_PREFIX = 'I am a'
 
 /**
  * useTypingRotation
@@ -37,12 +34,13 @@ function useTypingRotation(words, { typeSpeed = 90, deleteSpeed = 45, hold = 140
 }
 
 export default function Hero() {
+  const { t } = useLanguage()
+  const { hero } = t
   const typed = useTypingRotation(hero.taglineRotation)
   const lines = hero.name.split('\n')
 
   return (
     <section id="home" className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-16">
-      {/* Animated background: accent blob + scanning line */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
         <div
           className="absolute -right-24 top-1/4 h-[40vw] w-[40vw] max-w-[560px] max-h-[560px] rounded-full opacity-25 blur-3xl"
@@ -62,7 +60,6 @@ export default function Hero() {
 
         <p className="mb-3 font-mono text-base text-muted sm:text-lg">{hero.greeting}</p>
 
-        {/* Glitch name */}
         <h1 className="font-display text-[clamp(2.75rem,11vw,9rem)] font-bold uppercase leading-[0.92]">
           {lines.map((line, i) => (
             <span key={i} className="block">
@@ -73,10 +70,9 @@ export default function Hero() {
           ))}
         </h1>
 
-        {/* Typing rotation */}
         <div className="mt-6 flex items-center gap-3">
           <span className="grid place-items-center border-2 border-accent px-3 py-1 font-mono text-sm font-bold uppercase tracking-widest text-accent">
-            {ROLE_PREFIX}
+            {hero.rolePrefix}
           </span>
           <span className="font-mono text-xl text-fg sm:text-2xl">
             {typed}
@@ -88,7 +84,6 @@ export default function Hero() {
           {hero.description}
         </p>
 
-        {/* CTAs */}
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           {hero.ctas.map((cta) => (
             <Button key={cta.id} href={cta.href} variant={cta.variant} size="lg">
@@ -98,7 +93,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bottom marquee strip */}
       <div className="absolute inset-x-0 bottom-0 z-10 border-y-2 border-line/20 bg-bg/40 py-3 backdrop-blur-sm">
         <div className="marquee-track">
           {[...hero.marquee, ...hero.marquee].map((item, i) => (

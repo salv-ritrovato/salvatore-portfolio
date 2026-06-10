@@ -1,26 +1,29 @@
 import { useState } from 'react'
-import { contact, site, socials } from '../../data/portfolioData'
+import { useLanguage } from '../../i18n/LanguageContext'
 import SectionHeading from '../ui/SectionHeading'
 import ScrollReveal from '../ui/ScrollReveal'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-/** Validazione lato client (JS puro, nessuna libreria). */
-function validate(values) {
+function validate(values, messages) {
   const errors = {}
-  if (!values.name.trim()) errors.name = 'Il nome è obbligatorio.'
-  else if (values.name.trim().length < 2) errors.name = 'Nome troppo corto.'
+  if (!values.name.trim()) errors.name = messages.nameRequired
+  else if (values.name.trim().length < 2) errors.name = messages.nameShort
 
-  if (!values.email.trim()) errors.email = 'L’email è obbligatoria.'
-  else if (!EMAIL_RE.test(values.email.trim())) errors.email = 'Email non valida.'
+  if (!values.email.trim()) errors.email = messages.emailRequired
+  else if (!EMAIL_RE.test(values.email.trim())) errors.email = messages.emailInvalid
 
-  if (!values.message.trim()) errors.message = 'Scrivi un messaggio.'
-  else if (values.message.trim().length < 10) errors.message = 'Almeno 10 caratteri.'
+  if (!values.message.trim()) errors.message = messages.messageRequired
+  else if (values.message.trim().length < 10) errors.message = messages.messageShort
 
   return errors
 }
 
 export default function Contact() {
+  const { t } = useLanguage()
+  const { contact, site, socials } = t
+  const validationMessages = contact.validation
+
   const [values, setValues] = useState({ name: '', email: '', message: '' })
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState({})
@@ -30,24 +33,23 @@ export default function Contact() {
     const { name, value } = e.target
     const next = { ...values, [name]: value }
     setValues(next)
-    if (touched[name]) setErrors(validate(next))
+    if (touched[name]) setErrors(validate(next, validationMessages))
   }
 
   const handleBlur = (e) => {
     const { name } = e.target
-    setTouched((t) => ({ ...t, [name]: true }))
-    setErrors(validate(values))
+    setTouched((prev) => ({ ...prev, [name]: true }))
+    setErrors(validate(values, validationMessages))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const found = validate(values)
+    const found = validate(values, validationMessages)
     setErrors(found)
     setTouched({ name: true, email: true, message: true })
     if (Object.keys(found).length > 0) return
 
-    // Nessun backend: prepara una mailto con i dati del form.
-    const subject = encodeURIComponent(`Contatto portfolio — ${values.name}`)
+    const subject = encodeURIComponent(contact.form.mailtoSubject(values.name))
     const body = encodeURIComponent(`${values.message}\n\n— ${values.name} (${values.email})`)
     setSent(true)
     window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`
@@ -60,7 +62,6 @@ export default function Contact() {
         <SectionHeading index={contact.index} title={contact.heading} description={contact.description} />
 
         <div className="mt-16 grid gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Form */}
           <ScrollReveal className="lg:col-span-7">
             <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-6">
               {contact.form.fields.map((field) => {
@@ -116,7 +117,6 @@ export default function Contact() {
             </form>
           </ScrollReveal>
 
-          {/* Side: direct contacts */}
           <div className="lg:col-span-5">
             <ScrollReveal className="border-2 border-line/30 bg-surface p-8">
               <p className="mono-label mb-6 text-muted">{contact.directEmailLabel}</p>

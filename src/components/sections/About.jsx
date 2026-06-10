@@ -1,19 +1,17 @@
-import { about, site } from '../../data/portfolioData'
+import { useLanguage } from '../../i18n/LanguageContext'
 import SectionHeading from '../ui/SectionHeading'
 import ScrollReveal from '../ui/ScrollReveal'
 
-/**
- * About
- * Bio + foto placeholder + highlights e statistiche.
- */
 export default function About() {
+  const { t } = useLanguage()
+  const { about, site } = t
+
   return (
     <section id="about" className="relative z-10 border-t-2 border-line/20 py-24 sm:py-32">
       <div className="container-x">
         <SectionHeading index={about.index} title={about.heading} />
 
         <div className="mt-16 grid gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Photo */}
           <ScrollReveal className="lg:col-span-5">
             <div className="group relative">
               <div className="absolute inset-0 translate-x-3 translate-y-3 border-2 border-accent transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1" />
@@ -25,12 +23,11 @@ export default function About() {
                     className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
                   />
                 ) : (
-                  // Placeholder brutalist
                   <div className="flex h-full w-full flex-col items-center justify-center gap-4">
                     <span className="font-display text-7xl font-bold text-line/20">
                       {site.initials}
                     </span>
-                    <span className="mono-label text-muted">[ foto placeholder ]</span>
+                    <span className="mono-label text-muted">[ photo placeholder ]</span>
                   </div>
                 )}
               </div>
@@ -40,7 +37,6 @@ export default function About() {
             </div>
           </ScrollReveal>
 
-          {/* Text */}
           <div className="lg:col-span-7">
             <div className="flex flex-col gap-5">
               {about.paragraphs.map((p, i) => (
@@ -50,7 +46,6 @@ export default function About() {
               ))}
             </div>
 
-            {/* Highlights */}
             <div className="mt-10 grid gap-px border-2 border-line/30 bg-line/30 sm:grid-cols-3">
               {about.highlights.map((h, i) => (
                 <ScrollReveal key={h.id} delay={i * 120} className="bg-bg p-5">
@@ -60,7 +55,6 @@ export default function About() {
               ))}
             </div>
 
-            {/* Stats */}
             <div className="mt-8 flex flex-wrap gap-8">
               {about.stats.map((s, i) => (
                 <ScrollReveal key={s.id} delay={i * 120} className="flex items-baseline gap-2">
