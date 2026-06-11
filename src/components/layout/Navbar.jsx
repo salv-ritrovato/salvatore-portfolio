@@ -200,7 +200,7 @@ export default function Navbar() {
                   >
                     ▸
                   </span>
-                  {link.label}
+                  <span className="nav-glitch" data-text={link.label}>{link.label}</span>
                 </a>
               </li>
             ))}

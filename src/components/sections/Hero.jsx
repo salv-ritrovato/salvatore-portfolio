@@ -1,11 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { useLanguage } from '../../i18n/LanguageContext'
 import Button from '../ui/Button'
 
-/**
- * useTypingRotation
- * Effetto macchina da scrivere che cicla su una lista di stringhe.
- */
 function useTypingRotation(words, { typeSpeed = 90, deleteSpeed = 45, hold = 1400 } = {}) {
   const [index, setIndex] = useState(0)
   const [text, setText] = useState('')
@@ -33,14 +29,59 @@ function useTypingRotation(words, { typeSpeed = 90, deleteSpeed = 45, hold = 140
   return text
 }
 
+const SCRAMBLE_CHARS = '!@#$%<>[]{}|\\/01ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+function useScramble(original, { speed = 35, step = 2 } = {}) {
+  const [display, setDisplay] = useState(original)
+  const active = useRef(false)
+  const intervalRef = useRef(null)
+
+  const scramble = useCallback(() => {
+    if (active.current) return
+    active.current = true
+    let iteration = 0
+    const len = original.replace(/\s/g, '').length
+
+    intervalRef.current = setInterval(() => {
+      let charIdx = 0
+      setDisplay(
+        original
+          .split('')
+          .map((char) => {
+            if (char === ' ' || char === '\n') return char
+            const resolved = charIdx < iteration
+            charIdx++
+            if (resolved) return original.split('').filter((c) => c !== ' ' && c !== '\n')[charIdx - 1] ?? char
+            return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+          })
+          .join('')
+      )
+      iteration += step
+      if (iteration > len + step) {
+        clearInterval(intervalRef.current)
+        setDisplay(original)
+        active.current = false
+      }
+    }, speed)
+  }, [original, speed, step])
+
+  useEffect(() => () => clearInterval(intervalRef.current), [])
+
+  return { display, scramble }
+}
+
 export default function Hero() {
   const { t } = useLanguage()
   const { hero } = t
   const typed = useTypingRotation(hero.taglineRotation)
   const lines = hero.name.split('\n')
 
+  const scrambles = lines.map((line) => useScramble(line))
+
+  const handleNameHover = () => scrambles.forEach((s) => s.scramble())
+
   return (
-    <section id="home" className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-16">
+    <section id="home" className="hero-grain relative flex min-h-screen items-center overflow-hidden pt-28 pb-16">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
         <div
           className="absolute -right-24 top-1/4 h-[40vw] w-[40vw] max-w-[560px] max-h-[560px] rounded-full opacity-25 blur-3xl"
@@ -60,11 +101,14 @@ export default function Hero() {
 
         <p className="mb-3 font-mono text-base text-muted sm:text-lg">{hero.greeting}</p>
 
-        <h1 className="font-display text-[clamp(2.75rem,11vw,9rem)] font-bold uppercase leading-[0.92]">
+        <h1
+          className="font-display text-[clamp(2.75rem,11vw,9rem)] font-bold uppercase leading-[0.92] cursor-default select-none"
+          onMouseEnter={handleNameHover}
+        >
           {lines.map((line, i) => (
             <span key={i} className="block">
               <span className="glitch" data-text={line}>
-                {line}
+                {scrambles[i].display}
               </span>
             </span>
           ))}
