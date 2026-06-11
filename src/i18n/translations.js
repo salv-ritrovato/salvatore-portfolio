@@ -97,7 +97,7 @@ const shared = {
     },
     p4: {
       github: "https://github.com/salv-ritrovato/salvatore-portfolio",
-      demo: "#",
+      demo: "https://salvatoreritrovato.vercel.app/",
     },
     p5: {
       github: "https://github.com/salv-ritrovato/inlumine-studio",
