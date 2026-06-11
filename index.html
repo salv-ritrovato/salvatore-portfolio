@@ -9,6 +9,7 @@
       content="Salvatore Ritrovato — Web Developer specializzato in React, Node.js e MySQL. UI/UX, design responsivo e performance web."
     />
     <title>Salvatore Ritrovato — Web Developer</title>
+    <link rel="canonical" href="https://salvatoreritrovato.vercel.app/" />
 
     <!-- Fonts — preconnect + non-blocking load -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,6 +35,26 @@
     <meta name="twitter:description" content="Web Developer specializzato in React, Node.js e MySQL. UI/UX, design responsivo e performance web." />
   </head>
   <body>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Salvatore Ritrovato",
+      "url": "https://salvatoreritrovato.vercel.app/",
+      "jobTitle": "Web Developer",
+      "description": "Web Developer specializzato in React, Node.js e MySQL. UI/UX, design responsivo e performance web.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IT"
+      },
+      "email": "salv.ritrovato@gmail.com",
+      "sameAs": [
+        "https://github.com/salv-ritrovato",
+        "https://www.linkedin.com/in/salv-ritrovato/"
+      ],
+      "knowsAbout": ["React", "JavaScript", "Node.js", "Express", "MySQL", "HTML5", "CSS3", "UI/UX", "Web Performance"]
+    }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
