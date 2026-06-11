@@ -144,7 +144,7 @@ export const translations = {
         "Performance Nerd",
       ],
       description:
-        "Costruisco interfacce reattive, pulite e completamente responsive con React e Node. Ossessionato dai dettagli, dall’UX e dalle performance web.",
+        "Costruisco interfacce reattive, pulite e completamente responsive con React e Node. Ossessionato dai dettagli, dall'UX e dalle performance web.",
       marquee: [
         "HTML5",
         "CSS3",
@@ -179,12 +179,12 @@ export const translations = {
       photoAlt: "Salvatore Ritrovato",
       paragraphs: [
         "Sono un Web Developer focalizzato sul front-end moderno. Trasformo idee e mockup in prodotti digitali rapidi, accessibili e piacevoli da usare.",
-        "La mia ossessione? L’incontro tra design e ingegneria: micro-interazioni curate, layout responsive impeccabili e codice ottimizzato per performance fulminee.",
-        "Sviluppo applicazioni Full Stack con l’ecosistema JavaScript — React per l’interfaccia, Node ed Express sul back-end, MySQL per i dati — gestendo l’intero ciclo di sviluppo con Git e npm.",
+        "La mia ossessione? L'incontro tra design e ingegneria: micro-interazioni curate, layout responsive impeccabili e codice ottimizzato per performance fulminee.",
+        "Sviluppo applicazioni Full Stack con l'ecosistema JavaScript — React per l'interfaccia, Node ed Express sul back-end, MySQL per i dati — gestendo l'intero ciclo di sviluppo con Git e npm.",
         "Attualmente disponibile per progetti freelance e opportunità full-time in team che puntano alla qualità.",
       ],
       highlights: [
-        { id: "uiux", label: "UI / UX", value: "Design centrato sull’utente" },
+        { id: "uiux", label: "UI / UX", value: "Design centrato sull'utente" },
         {
           id: "responsive",
           label: "Responsive",
@@ -294,7 +294,7 @@ export const translations = {
       validation: {
         nameRequired: "Il nome è obbligatorio.",
         nameShort: "Nome troppo corto.",
-        emailRequired: "L’email è obbligatoria.",
+        emailRequired: "L'email è obbligatoria.",
         emailInvalid: "Email non valida.",
         messageRequired: "Scrivi un messaggio.",
         messageShort: "Almeno 10 caratteri.",
@@ -323,8 +323,6 @@ export const translations = {
       subtitle: "FAQ · risposte istantanee",
       openLabel: "Apri assistente FAQ",
       closeLabel: "Chiudi assistente FAQ",
-      placeholder: "Scrivi una domanda...",
-      sendLabel: "Invia messaggio",
       typing: "sta scrivendo…",
       quickLabel: "Domande rapide",
       quickReplies: [
@@ -334,85 +332,21 @@ export const translations = {
         { id: "contact", label: "Contatti" },
         { id: "availability", label: "Disponibile?" },
       ],
-      keywords: {
-        greeting: [
-          "ciao",
-          "salve",
-          "buongiorno",
-          "buonasera",
-          "hey",
-          "ehi",
-          "hello",
-          "hi",
-        ],
-        about: [
-          "chi sei",
-          "chi e",
-          "presentati",
-          "about",
-          "raccontami",
-          "profilo",
-          "sviluppatore",
-        ],
-        skills: [
-          "skill",
-          "stack",
-          "tecnologie",
-          "tecnologia",
-          "linguaggi",
-          "framework",
-          "react",
-          "node",
-          "mysql",
-        ],
-        projects: [
-          "progetti",
-          "progetto",
-          "lavori",
-          "portfolio",
-          "gamify",
-          "gym",
-          "ferraro",
-          "inlumine",
-          "demo",
-        ],
-        contact: [
-          "contatto",
-          "contatti",
-          "email",
-          "scrivimi",
-          "linkedin",
-          "github",
-          "parlare",
-          "messaggio",
-        ],
-        availability: [
-          "disponibile",
-          "disponibilita",
-          "freelance",
-          "assunto",
-          "lavoro",
-          "collaborare",
-          "assumi",
-        ],
-        help: ["aiuto", "help", "cosa puoi", "cosa sai", "domande"],
-      },
       responses: {
         greeting:
-          "Ciao! Sono l’assistente FAQ di Salvatore. Posso parlarti di chi è, del suo stack, dei progetti e di come contattarlo. Prova un pulsante qui sotto o scrivi una domanda.",
+          "Ciao! Sono l'assistente FAQ di Salvatore. Posso parlarti di chi è, del suo stack, dei progetti e di come contattarlo. Prova un pulsante qui sotto.",
         about: (name, role) =>
-          `${name} è un ${role} focalizzato su front-end moderno e Full Stack JavaScript. Trasforma idee in interfacce rapide, accessibili e curate nei dettagli — dal design all’ingegneria.`,
+          `${name} è un ${role} focalizzato su front-end moderno e Full Stack JavaScript. Trasforma idee in interfacce rapide, accessibili e curate nei dettagli — dal design all'ingegneria.`,
         skills: (list) =>
-          `Ecco le tecnologie principali con cui lavora:\n${list}\n\nVuoi approfondire? Scorri la sezione Skills o chiedimi dei progetti.`,
+          `Ecco le tecnologie principali con cui lavora:\n${list}\n\nVuoi approfondire? Scorri la sezione Skills.`,
         projects: (list) =>
           `Alcuni progetti selezionati:\n${list}\n\nTrovi demo e codice nella sezione Progetti del sito.`,
         contact: (email, github, linkedin) =>
           `Puoi contattarlo così:\n• Email: ${email}\n• GitHub: ${github}\n• LinkedIn: ${linkedin}\n\nOppure usa il form nella sezione Contatti.`,
         availability: (text) =>
           `${text}. Per collaborazioni o opportunità, la sezione Contatti è il modo più diretto.`,
-        help: 'Posso rispondere su: chi è Salvatore, stack tecnologico, progetti, disponibilità e contatti. Usa i pulsanti rapidi o scrivi in libertà — es. "quali tecnologie usi?" o "come ti contatto?".',
         fallback:
-          "Non sono sicuro di aver capito. Prova una domanda rapida qui sotto, oppure chiedi di stack, progetti, contatti o disponibilità.",
+          "Non sono sicuro di aver capito. Prova una domanda rapida qui sotto.",
       },
     },
     ui: {
@@ -465,7 +399,7 @@ export const translations = {
     },
     hero: {
       index: "01 / HOME",
-      greeting: "Hi, I’m",
+      greeting: "Hi, I'm",
       name: "SALVATORE\nRITROVATO",
       rolePrefix: "I am a",
       taglineRotation: [
@@ -509,7 +443,7 @@ export const translations = {
       photo: "/img/FotoCV.png",
       photoAlt: "Salvatore Ritrovato",
       paragraphs: [
-        "I’m a Web Developer focused on modern front-end development. I turn ideas and mockups into fast, accessible and enjoyable digital products.",
+        "I'm a Web Developer focused on modern front-end development. I turn ideas and mockups into fast, accessible and enjoyable digital products.",
         "My obsession? The intersection of design and engineering: polished micro-interactions, flawless responsive layouts and code optimized for blazing performance.",
         "I build Full Stack applications with the JavaScript ecosystem — React for the interface, Node and Express on the back-end, MySQL for data — managing the full development cycle with Git and npm.",
         "Currently available for freelance projects and full-time opportunities in quality-driven teams.",
@@ -572,7 +506,7 @@ export const translations = {
           number: "04",
           title: "Portfolio Engine",
           description:
-            "Yes, this is exactly the site you’re on right now. A brutalist, ultra-light portfolio built by cutting the fat: no heavy animation libraries, just pure CSS logic and Intersection Observer.",
+            "Yes, this is exactly the site you're on right now. A brutalist, ultra-light portfolio built by cutting the fat: no heavy animation libraries, just pure CSS logic and Intersection Observer.",
           tech: shared.projectTech.p4,
           links: shared.projectLinks.p4,
         },
@@ -582,7 +516,7 @@ export const translations = {
           title: "inLumine Studio",
           featured: true,
           description:
-            "The visual design of inLumine Studio represents one of my most ambitious speculative design challenges. Born as a personal concept project, its core goal is to translate the abstract concepts of “light” and innovation into a cohesive visual identity. The design revolves around a modern, clean, and striking language, crafted to convey strategic solidity while expressing a strong orientation toward the future. Every graphic element was developed to position this imaginary brand as an authoritative reference point in the digital strategy field, showcasing my approach to branding without client constraints.",
+            "The visual design of inLumine Studio represents one of my most ambitious speculative design challenges. Born as a personal concept project, its core goal is to translate the abstract concepts of \"light\" and innovation into a cohesive visual identity. The design revolves around a modern, clean, and striking language, crafted to convey strategic solidity while expressing a strong orientation toward the future. Every graphic element was developed to position this imaginary brand as an authoritative reference point in the digital strategy field, showcasing my approach to branding without client constraints.",
           tech: shared.projectTech.p5,
           links: shared.projectLinks.p5,
         },
@@ -590,7 +524,7 @@ export const translations = {
     },
     contact: {
       index: "05 / CONTACT",
-      heading: "Let’s talk",
+      heading: "Let's talk",
       description:
         "Have a project, a collaboration in mind, or just want to exchange a few lines of code? Drop me a message.",
       form: {
@@ -653,8 +587,6 @@ export const translations = {
       subtitle: "FAQ · instant answers",
       openLabel: "Open FAQ assistant",
       closeLabel: "Close FAQ assistant",
-      placeholder: "Type a question...",
-      sendLabel: "Send message",
       typing: "is typing…",
       quickLabel: "Quick questions",
       quickReplies: [
@@ -664,82 +596,21 @@ export const translations = {
         { id: "contact", label: "Contact" },
         { id: "availability", label: "Available?" },
       ],
-      keywords: {
-        greeting: [
-          "hello",
-          "hi",
-          "hey",
-          "good morning",
-          "good evening",
-          "ciao",
-          "howdy",
-        ],
-        about: [
-          "who are you",
-          "about",
-          "tell me",
-          "profile",
-          "developer",
-          "salvatore",
-        ],
-        skills: [
-          "skill",
-          "stack",
-          "technologies",
-          "technology",
-          "languages",
-          "framework",
-          "react",
-          "node",
-          "mysql",
-        ],
-        projects: [
-          "projects",
-          "project",
-          "work",
-          "portfolio",
-          "gamify",
-          "gym",
-          "ferraro",
-          "inlumine",
-          "demo",
-        ],
-        contact: [
-          "contact",
-          "email",
-          "reach",
-          "linkedin",
-          "github",
-          "message",
-          "write",
-        ],
-        availability: [
-          "available",
-          "availability",
-          "freelance",
-          "hire",
-          "hiring",
-          "collaborate",
-          "job",
-        ],
-        help: ["help", "what can you", "what do you", "questions"],
-      },
       responses: {
         greeting:
-          "Hi! I’m Salvatore’s FAQ assistant. I can tell you about him, his stack, projects and how to get in touch. Try a quick button below or type a question.",
+          "Hi! I'm Salvatore's FAQ assistant. I can tell you about him, his stack, projects and how to get in touch. Try a quick button below.",
         about: (name, role) =>
           `${name} is a ${role} focused on modern front-end and Full Stack JavaScript. He turns ideas into fast, accessible interfaces with obsessive attention to detail — from design to engineering.`,
         skills: (list) =>
-          `Here are the main technologies he works with:\n${list}\n\nWant more detail? Check the Skills section or ask me about projects.`,
+          `Here are the main technologies he works with:\n${list}\n\nWant more detail? Check the Skills section.`,
         projects: (list) =>
-          `Selected projects:\n${list}\n\nYou’ll find demos and code in the Projects section.`,
+          `Selected projects:\n${list}\n\nYou'll find demos and code in the Projects section.`,
         contact: (email, github, linkedin) =>
           `You can reach him here:\n• Email: ${email}\n• GitHub: ${github}\n• LinkedIn: ${linkedin}\n\nOr use the contact form on this site.`,
         availability: (text) =>
           `${text}. For collaborations or opportunities, the Contact section is the fastest way to reach out.`,
-        help: 'I can answer questions about: who Salvatore is, his tech stack, projects, availability and contact info. Use the quick buttons or type freely — e.g. "what technologies do you use?" or "how can I contact you?".',
         fallback:
-          "I’m not sure I understood. Try a quick button below, or ask about stack, projects, contact or availability.",
+          "I'm not sure I understood. Try a quick button below.",
       },
     },
     ui: {
