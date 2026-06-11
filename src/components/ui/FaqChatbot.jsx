@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../../i18n/LanguageContext'
-import { getChatResponse, resolveIntent } from '../../i18n/chatbotLogic'
+import { resolveIntent } from '../../i18n/chatbotLogic'
 
 let msgCounter = 0
 const nextId = () => `msg-${++msgCounter}`
@@ -31,11 +31,9 @@ export default function FaqChatbot() {
   const { chatbot } = t
 
   const [open, setOpen] = useState(false)
-  const [input, setInput] = useState('')
   const [messages, setMessages] = useState([])
   const [typing, setTyping] = useState(false)
   const listRef = useRef(null)
-  const inputRef = useRef(null)
 
   const scrollToBottom = () => {
     requestAnimationFrame(() => {
@@ -46,7 +44,6 @@ export default function FaqChatbot() {
 
   useEffect(() => {
     setMessages([{ id: nextId(), role: 'bot', text: resolveIntent('greeting', t) }])
-    setInput('')
     setTyping(false)
   }, [locale, t])
 
@@ -63,21 +60,16 @@ export default function FaqChatbot() {
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
-  useEffect(() => {
-    if (open) inputRef.current?.focus()
-  }, [open])
-
-  const reply = (userText, intentId = null) => {
+  const reply = (userText, intentId) => {
     const trimmed = userText.trim()
     if (!trimmed) return
 
-    const botText = intentId ? resolveIntent(intentId, t) : getChatResponse(trimmed, t)
+    const botText = resolveIntent(intentId, t)
 
     setMessages((prev) => [
       ...prev,
       { id: nextId(), role: 'user', text: trimmed },
     ])
-    setInput('')
     setTyping(true)
 
     window.setTimeout(() => {
@@ -87,11 +79,6 @@ export default function FaqChatbot() {
       ])
       setTyping(false)
     }, 380)
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    reply(input)
   }
 
   const handleQuickReply = (intentId, label) => {
@@ -142,7 +129,7 @@ export default function FaqChatbot() {
           {typing && (
             <div className="flex justify-start">
               <div className="border-2 border-line/30 bg-surface px-4 py-3 font-mono text-sm text-muted">
-                <span className="mono-label text-accent">SR</span> {chatbot.typing}
+                <span className="mono-label text-accent">Zeno</span> {chatbot.typing}
               </div>
             </div>
           )}
@@ -164,26 +151,6 @@ export default function FaqChatbot() {
             ))}
           </div>
         </div>
-
-        <form onSubmit={handleSubmit} className="flex shrink-0 gap-2 border-t-2 border-line/30 p-3">
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder={chatbot.placeholder}
-            disabled={typing}
-            className="min-w-0 flex-1 border-2 border-line/40 bg-surface px-3 py-2 font-mono text-sm text-fg outline-none transition-colors focus:border-accent disabled:opacity-50"
-          />
-          <button
-            type="submit"
-            disabled={typing || !input.trim()}
-            aria-label={chatbot.sendLabel}
-            className="shrink-0 border-2 border-accent bg-accent px-3 py-2 font-mono text-xs font-bold uppercase tracking-widest text-bg transition-all hover:bg-transparent hover:text-accent disabled:opacity-50"
-          >
-            →
-          </button>
-        </form>
       </div>
 
       <button
