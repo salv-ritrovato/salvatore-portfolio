@@ -17,6 +17,14 @@ Monospace typography defines the entire visual language, reinforcing a sense of 
 
 ---
 
+## Development Notes
+
+This site is an ecosystem in constant evolution. I am actively collaborating with Claude to iterate on features, optimize the codebase, and experiment with new architectural solutions.
+
+The goal is twofold: to continuously improve the user experience and to refine my *prompt engineering* techniques. Using AI consciously allows me to write cleaner code, minimize token usage, and maintain a development process that is fluid, rigorous, and dedicated to continuous learning.
+
+---
+
 ## Stack
 
 - React.js (Vite)
