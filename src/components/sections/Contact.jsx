@@ -53,10 +53,10 @@ export default function Contact() {
     setStatus('sending')
     try {
       await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        'service_nnzhodg',
+        'template_cojjbpf',
         { from_name: values.name, from_email: values.email, message: values.message },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        '5A_zqL2I76NVuar6O',
       )
       setStatus('success')
       setValues({ name: '', email: '', message: '' })
