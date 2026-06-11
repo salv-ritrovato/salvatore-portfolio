@@ -20,7 +20,8 @@ export default function About() {
                   <img
                     src={about.photo}
                     alt={about.photoAlt}
-                    className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-all duration-500"
                   />
                 ) : (
                   <div className="flex h-full w-full flex-col items-center justify-center gap-4">
