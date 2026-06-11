@@ -1,50 +1,26 @@
 # Salvatore Ritrovato — Portfolio
 
-Portfolio personale da **Web Developer**. Single page application componentizzata,
-estetica **brutalist-tech**: griglia rigida, contrasti estremi bianco/nero, un solo
-colore neon (acid lime `#ccff00`), tipografia monospace.
+This website is a personal web developer portfolio built as a single-page, component-driven application. It represents a focused exploration of brutalist-tech aesthetics applied to modern frontend development.
+
+The visual system is based on rigid grid structures, extreme black/white contrast, and a single accent color — acid lime (`#ccff00`). Typography is strictly monospace, reinforcing a technical, uncompromising identity.
+
+The project is not just a showcase of work, but also an expression of design philosophy: clarity through constraint, and impact through reduction.
+
+---
+
+## Aesthetic
+
+**Brutalist-Tech Interface Design**  
+The interface is built around a strict grid system, high-contrast black and white composition, and a single neon accent color. The acid lime (`#ccff00`) acts as the only visual disruption in an otherwise minimal and rigid environment.
+
+Monospace typography defines the entire visual language, reinforcing a sense of technical precision and developer-oriented identity. Every interaction, spacing decision, and layout rule is designed to feel structural rather than decorative.
+
+---
 
 ## Stack
 
-- **React.js** (Vite)
-- **Tailwind CSS** (v3)
-- **CSS plain** per variabili, animazioni custom ed effetti speciali
-- **JavaScript ES6+**
-- Nessuna libreria di animazione esterna — solo CSS + Intersection Observer
-
-## Avvio
-
-```bash
-npm install
-npm run dev
-```
-
-Build di produzione:
-
-```bash
-npm run build
-npm run preview
-```
-
-## Struttura
-
-```
-src/
-├── components/
-│   ├── layout/      → Navbar, Footer, BackToTop
-│   ├── sections/    → Hero, About, Skills, Projects, Contact
-│   └── ui/          → Button, SectionHeading, ScrollReveal, AnimatedCursor, Tag
-├── data/
-│   └── portfolioData.js   → tutti i contenuti del sito (zero hardcoding nei componenti)
-├── hooks/
-│   └── useScrollReveal.js → Intersection Observer riutilizzabile
-├── App.jsx
-├── index.css        → variabili CSS, reset, font, animazioni globali
-└── main.jsx
-```
-
-## Personalizzazione
-
-Tutto il testo, i progetti, le skill e i link vivono in `src/data/portfolioData.js`.
-I colori, i font e gli spazi sono definiti come CSS custom properties in `:root`
-dentro `src/index.css`.
+- React.js (Vite)
+- Tailwind CSS v3
+- Plain CSS for variables, custom animations, and visual effects
+- JavaScript ES6+
+- No external animation libraries — only CSS and Intersection Observer
