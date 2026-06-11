@@ -72,13 +72,14 @@ export default function FaqChatbot() {
     ])
     setTyping(true)
 
+    const delay = Math.floor(Math.random() * 1000) + 1000
     window.setTimeout(() => {
       setMessages((prev) => [
         ...prev,
         { id: nextId(), role: 'bot', text: botText },
       ])
       setTyping(false)
-    }, 380)
+    }, delay)
   }
 
   const handleQuickReply = (intentId, label) => {
