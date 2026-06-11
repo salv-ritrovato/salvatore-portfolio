@@ -182,7 +182,7 @@ export const translations = {
     about: {
       index: "02 / ABOUT",
       heading: "Chi sono",
-      photo: "/img/foto-salvatore.png",
+      photo: "/img/foto-salvatore.webp",
       photoAlt: "Salvatore Ritrovato",
       paragraphs: [
         "Sono un Web Developer focalizzato sul front-end moderno. Trasformo idee e mockup in prodotti digitali rapidi, accessibili e piacevoli da usare.",
@@ -462,7 +462,7 @@ export const translations = {
     about: {
       index: "02 / ABOUT",
       heading: "About me",
-      photo: "/img/foto-salvatore.png",
+      photo: "/img/foto-salvatore.webp",
       photoAlt: "Salvatore Ritrovato",
       paragraphs: [
         "I'm a Web Developer focused on modern front-end development. I turn ideas and mockups into fast, accessible and enjoyable digital products.",
