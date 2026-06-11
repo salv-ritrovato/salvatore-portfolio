@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import emailjs from '@emailjs/browser'
 import { useLanguage } from '../../i18n/LanguageContext'
 import SectionHeading from '../ui/SectionHeading'
 import ScrollReveal from '../ui/ScrollReveal'
@@ -52,6 +51,7 @@ export default function Contact() {
 
     setStatus('sending')
     try {
+      const emailjs = (await import('@emailjs/browser')).default
       await emailjs.send(
         'service_nnzhodg',
         'template_cojjbpf',
