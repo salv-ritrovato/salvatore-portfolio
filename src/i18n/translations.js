@@ -320,7 +320,7 @@ export const translations = {
     },
     chatbot: {
       title: "Zeno",
-      subtitle: "FAQ · risposte istantanee",
+      subtitle: "Assistente virtuale",
       openLabel: "Apri assistente FAQ",
       closeLabel: "Chiudi assistente FAQ",
       typing: "sta scrivendo…",
@@ -331,10 +331,14 @@ export const translations = {
         { id: "projects", label: "Progetti" },
         { id: "contact", label: "Contatti" },
         { id: "availability", label: "Disponibile?" },
+        {
+          id: "easter_egg",
+          label: "Cosa c'è nel buio?",
+        },
       ],
       responses: {
         greeting:
-          "Ciao! Sono l'assistente FAQ di Salvatore. Posso parlarti di chi è, del suo stack, dei progetti e di come contattarlo. Prova un pulsante qui sotto.",
+          "Ciao! Sono Zeno! L'assistente di Salvatore. Posso parlarti di chi è, del suo stack, dei progetti e di come contattarlo. Prova uno dei pulsanti qui sotto.",
         about: (name, role) =>
           `${name} è un ${role} focalizzato su front-end moderno e Full Stack JavaScript. Trasforma idee in interfacce rapide, accessibili e curate nei dettagli — dal design all'ingegneria.`,
         skills: (list) =>
@@ -347,6 +351,8 @@ export const translations = {
           `${text}. Per collaborazioni o opportunità, la sezione Contatti è il modo più diretto.`,
         fallback:
           "Non sono sicuro di aver capito. Prova una domanda rapida qui sotto.",
+        easter_egg:
+          "Niente. Almeno, è quello che dicono tutti all'inizio. Credo.",
       },
     },
     ui: {
@@ -516,7 +522,7 @@ export const translations = {
           title: "inLumine Studio",
           featured: true,
           description:
-            "The visual design of inLumine Studio represents one of my most ambitious speculative design challenges. Born as a personal concept project, its core goal is to translate the abstract concepts of \"light\" and innovation into a cohesive visual identity. The design revolves around a modern, clean, and striking language, crafted to convey strategic solidity while expressing a strong orientation toward the future. Every graphic element was developed to position this imaginary brand as an authoritative reference point in the digital strategy field, showcasing my approach to branding without client constraints.",
+            'The visual design of inLumine Studio represents one of my most ambitious speculative design challenges. Born as a personal concept project, its core goal is to translate the abstract concepts of "light" and innovation into a cohesive visual identity. The design revolves around a modern, clean, and striking language, crafted to convey strategic solidity while expressing a strong orientation toward the future. Every graphic element was developed to position this imaginary brand as an authoritative reference point in the digital strategy field, showcasing my approach to branding without client constraints.',
           tech: shared.projectTech.p5,
           links: shared.projectLinks.p5,
         },
@@ -584,7 +590,7 @@ export const translations = {
     },
     chatbot: {
       title: "Zeno",
-      subtitle: "FAQ · instant answers",
+      subtitle: "Virtual assistant",
       openLabel: "Open FAQ assistant",
       closeLabel: "Close FAQ assistant",
       typing: "is typing…",
@@ -595,10 +601,14 @@ export const translations = {
         { id: "projects", label: "Projects" },
         { id: "contact", label: "Contact" },
         { id: "availability", label: "Available?" },
+        {
+          id: "easter_egg",
+          label: "What's in the dark?",
+        },
       ],
       responses: {
         greeting:
-          "Hi! I'm Salvatore's FAQ assistant. I can tell you about him, his stack, projects and how to get in touch. Try a quick button below.",
+  "Hi! I'm Zeno, Salvatore's assistant. I can tell you about him, his stack, projects and how to get in touch. Try one of the buttons below.",
         about: (name, role) =>
           `${name} is a ${role} focused on modern front-end and Full Stack JavaScript. He turns ideas into fast, accessible interfaces with obsessive attention to detail — from design to engineering.`,
         skills: (list) =>
@@ -609,8 +619,8 @@ export const translations = {
           `You can reach him here:\n• Email: ${email}\n• GitHub: ${github}\n• LinkedIn: ${linkedin}\n\nOr use the contact form on this site.`,
         availability: (text) =>
           `${text}. For collaborations or opportunities, the Contact section is the fastest way to reach out.`,
-        fallback:
-          "I'm not sure I understood. Try a quick button below.",
+        easter_egg: "Nothing. At least, that's what everyone says at first.",
+        fallback: "I'm not sure I understood. Try a quick button below.",
       },
     },
     ui: {
