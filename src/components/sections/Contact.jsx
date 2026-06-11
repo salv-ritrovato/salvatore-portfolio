@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 import { useLanguage } from '../../i18n/LanguageContext'
 import SectionHeading from '../ui/SectionHeading'
 import ScrollReveal from '../ui/ScrollReveal'
@@ -27,7 +28,7 @@ export default function Contact() {
   const [values, setValues] = useState({ name: '', email: '', message: '' })
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState({})
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState(null) // null | 'sending' | 'success' | 'error'
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -42,18 +43,29 @@ export default function Contact() {
     setErrors(validate(values, validationMessages))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const found = validate(values, validationMessages)
     setErrors(found)
     setTouched({ name: true, email: true, message: true })
     if (Object.keys(found).length > 0) return
 
-    const subject = encodeURIComponent(contact.form.mailtoSubject(values.name))
-    const body = encodeURIComponent(`${values.message}\n\n— ${values.name} (${values.email})`)
-    setSent(true)
-    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`
-    setTimeout(() => setSent(false), 4000)
+    setStatus('sending')
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        { from_name: values.name, from_email: values.email, message: values.message },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      )
+      setStatus('success')
+      setValues({ name: '', email: '', message: '' })
+      setTouched({})
+      setTimeout(() => setStatus(null), 5000)
+    } catch {
+      setStatus('error')
+      setTimeout(() => setStatus(null), 5000)
+    }
   }
 
   return (
@@ -103,15 +115,21 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="group mt-2 inline-flex items-center justify-center gap-3 border-2 border-accent bg-accent px-8 py-4 font-mono text-sm font-bold uppercase tracking-widest text-bg transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:bg-transparent hover:text-accent hover:shadow-brutal-accent active:translate-x-0 active:translate-y-0 active:shadow-none"
+                disabled={status === 'sending'}
+                className="group mt-2 inline-flex items-center justify-center gap-3 border-2 border-accent bg-accent px-8 py-4 font-mono text-sm font-bold uppercase tracking-widest text-bg transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:bg-transparent hover:text-accent hover:shadow-brutal-accent active:translate-x-0 active:translate-y-0 active:shadow-none disabled:pointer-events-none disabled:opacity-60"
               >
-                {contact.form.submitLabel}
+                {status === 'sending' ? contact.form.sendingLabel : contact.form.submitLabel}
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </button>
 
-              {sent && (
+              {status === 'success' && (
                 <p className="font-mono text-sm text-accent" role="status">
                   ▸ {contact.form.successMessage}
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="font-mono text-sm text-[#ff5577]" role="status">
+                  ▸ {contact.form.errorMessage}
                 </p>
               )}
             </form>

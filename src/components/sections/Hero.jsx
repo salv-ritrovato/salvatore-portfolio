@@ -86,7 +86,13 @@ export default function Hero() {
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           {hero.ctas.map((cta) => (
-            <Button key={cta.id} href={cta.href} variant={cta.variant} size="lg">
+            <Button
+              key={cta.id}
+              href={cta.href}
+              variant={cta.variant}
+              size="lg"
+              {...(cta.download ? { download: true, target: '_blank', rel: 'noreferrer' } : {})}
+            >
               {cta.label}
             </Button>
           ))}
