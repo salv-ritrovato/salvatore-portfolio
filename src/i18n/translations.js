@@ -78,7 +78,7 @@ const shared = {
       "MySQL",
     ],
     p2: ["React", "JavaScript", "Tailwind", "CSS3"],
-    p3: ["React", "JavaScript", "Tailwind", "CSS3"],
+    p3: ["React", "JavaScript", "Tailwind", "CSS3", "Claude Code"],
     p4: ["React", "Tailwind", "CSS3"],
     p5: ["React", "JavaScript", "CSS3", "Tailwind"],
   },
