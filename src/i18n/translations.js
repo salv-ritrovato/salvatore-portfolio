@@ -92,8 +92,8 @@ const shared = {
       demo: "https://fitness-gym-tirone.vercel.app/",
     },
     p3: {
-      github: "https://github.com/salv-ritrovato/studio-ferraro",
-      demo: "https://studio-ferraro.vercel.app/",
+      github: "https://github.com/salv-ritrovato/subsea-systems",
+      demo: "https://subsea-systems.vercel.app/",
     },
     p4: {
       github: "https://github.com/salv-ritrovato/salvatore-portfolio",
@@ -237,9 +237,9 @@ export const translations = {
         {
           id: "p3",
           number: "03",
-          title: "Studio Dentistico Ferraro",
+          title: "Subsea Systems",
           description:
-            "Soluzione web responsive in React per uno studio dentistico, che unisce un sito showcase tradizionale a un sistema di prenotazione visite in tempo reale. Digitalizza la gestione dello studio e il rapporto con il paziente, con presentazione dinamica di equipe e trattamenti e prenotazioni istantanee.",
+            "Un sito concept cinematografico in React per un'immaginaria azienda di robotica per le profondità marine, con video subacqueo full-bleed, animazioni scroll-driven e un'estetica editoriale dark. Il mio primo esperimento di sviluppo fianco a fianco con Claude Code — iterando su feature, performance e design attraverso lo sviluppo assistito dall'AI.",
           tech: shared.projectTech.p3,
           links: shared.projectLinks.p3,
         },
@@ -517,9 +517,9 @@ export const translations = {
         {
           id: "p3",
           number: "03",
-          title: "Studio Dentistico Ferraro",
+          title: "Subsea Systems",
           description:
-            "A responsive React web solution for a dental practice, combining a traditional showcase site with real-time appointment booking. It digitizes practice management and patient relations with dynamic team and treatment pages plus instant scheduling.",
+            "A cinematic React concept site for a fictional deep-sea robotics company, featuring full-bleed underwater video, scroll-driven animations, and an editorial dark aesthetic. It is my first experiment working side by side with Claude Code — iterating on features, performance, and design through AI-assisted development.",
           tech: shared.projectTech.p3,
           links: shared.projectLinks.p3,
         },
