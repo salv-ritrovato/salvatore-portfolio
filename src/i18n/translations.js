@@ -89,7 +89,7 @@ const shared = {
     },
     p2: {
       github: "https://github.com/salv-ritrovato/fitness-gym-tirone",
-      demo: "https://fitness-gym-tirone.vercel.app/",
+      demo: "https://www.fitnessgymtirone.it/",
     },
     p3: {
       github: "https://github.com/salv-ritrovato/subsea-systems",
