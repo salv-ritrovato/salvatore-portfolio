@@ -30,15 +30,6 @@ function ProjectCard({ project, delay, ui, featured = false }) {
   const iconLinks = (
     <div className="flex gap-2">
       <a
-        href={project.links.github}
-        target="_blank"
-        rel="noreferrer"
-        aria-label={ui.projectOnGithub(project.title)}
-        className="grid h-10 w-10 place-items-center border-2 border-line/40 font-mono text-xs font-bold transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
-      >
-        GH
-      </a>
-      <a
         href={project.links.demo}
         target="_blank"
         rel="noreferrer"
