@@ -78,7 +78,7 @@ const shared = {
       "MySQL",
     ],
     p2: ["React", "JavaScript", "Tailwind", "CSS3"],
-    p3: ["React", "JavaScript", "Tailwind", "CSS3", "Claude Code"],
+    p3: ["React", "JavaScript", "Tailwind", "CSS3"],
     p4: ["React", "Tailwind", "CSS3"],
     p5: ["React", "JavaScript", "CSS3", "Tailwind"],
   },
@@ -92,8 +92,8 @@ const shared = {
       demo: "https://www.fitnessgymtirone.it/",
     },
     p3: {
-      github: "https://github.com/salv-ritrovato/subsea-systems",
-      demo: "https://subsea-systems.vercel.app/",
+      github: "https://github.com/salv-ritrovato/pub-nerocaffe",
+      demo: "#",
     },
     p4: {
       github: "https://github.com/salv-ritrovato/salvatore-portfolio",
@@ -237,9 +237,9 @@ export const translations = {
         {
           id: "p3",
           number: "03",
-          title: "Subsea Systems",
+          title: "Pub Nerocaffe",
           description:
-            "Un sito concept cinematografico in React per un'immaginaria azienda di robotica per le profondità marine, con video subacqueo full-bleed, animazioni scroll-driven e un'estetica editoriale dark. Il mio primo esperimento di sviluppo fianco a fianco con Claude Code — iterando su feature, performance e design attraverso lo sviluppo assistito dall'AI.",
+            "Sito vetrina per il Pub Nerocaffe: un'esperienza digitale multimomento, dalle colazioni allo street food notturno, in stile Irish pub contemporaneo. Veloce, mobile-first e ottimizzato per turisti e clienti del borgo.",
           tech: shared.projectTech.p3,
           links: shared.projectLinks.p3,
         },
@@ -517,9 +517,9 @@ export const translations = {
         {
           id: "p3",
           number: "03",
-          title: "Subsea Systems",
+          title: "Pub Nerocaffe",
           description:
-            "A cinematic React concept site for a fictional deep-sea robotics company, featuring full-bleed underwater video, scroll-driven animations, and an editorial dark aesthetic. It is my first experiment working side by side with Claude Code — iterating on features, performance, and design through AI-assisted development.",
+            "Showcase website for Pub Nerocaffe: a digital multi-moment experience, from breakfast to late-night street food, in a contemporary Irish pub style. Fast, mobile-first, and optimized for tourists and locals in the village.",
           tech: shared.projectTech.p3,
           links: shared.projectLinks.p3,
         },
