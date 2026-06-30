@@ -27,20 +27,6 @@ function ProjectCard({ project, delay, ui, featured = false }) {
     el.style.setProperty('--ry', '0deg')
   }
 
-  const iconLinks = (
-    <div className="flex gap-2">
-      <a
-        href={project.links.demo}
-        target="_blank"
-        rel="noreferrer"
-        aria-label={ui.projectDemo(project.title)}
-        className="grid h-10 w-10 place-items-center border-2 border-line/40 transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
-      >
-        ↗
-      </a>
-    </div>
-  )
-
   return (
     <ScrollReveal
       delay={delay}
@@ -108,18 +94,16 @@ function ProjectCard({ project, delay, ui, featured = false }) {
                   {ui.viewProject}
                   <span className="transition-transform group-hover:translate-x-1">→</span>
                 </a>
-                {iconLinks}
               </div>
             </div>
           </div>
         ) : (
           /* ---------- CARD NORMALE (invariata) ---------- */
           <>
-            <div className="mb-6 flex items-start justify-between" style={{ transform: 'translateZ(40px)' }}>
+            <div className="mb-6" style={{ transform: 'translateZ(40px)' }}>
               <span className="font-display text-5xl font-bold text-line/20 transition-colors duration-300 group-hover:text-accent">
                 {project.number}
               </span>
-              {iconLinks}
             </div>
 
             <h3 className="font-display text-2xl font-bold uppercase" style={{ transform: 'translateZ(30px)' }}>

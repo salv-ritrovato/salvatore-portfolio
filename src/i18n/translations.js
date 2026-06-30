@@ -93,7 +93,7 @@ const shared = {
     },
     p3: {
       github: "https://github.com/salv-ritrovato/pub-nerocaffe",
-      demo: "#",
+      demo: "https://www.pubnerocaffe.it",
     },
     p4: {
       github: "https://github.com/salv-ritrovato/salvatore-portfolio",
@@ -101,7 +101,7 @@ const shared = {
     },
     p5: {
       github: "https://github.com/salv-ritrovato/inlumine-studio",
-      demo: "https://inlumine-studio.vercel.app/",
+      demo: "https://www.inlumine.it",
     },
   },
 };
