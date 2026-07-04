@@ -298,80 +298,38 @@ button {
 
 /* Custom cursor — nascosto su touch (fallback se montato nel DOM) */
 @media (hover: none), (pointer: coarse) {
-  .cursor-dot,
-  .cursor-ring {
+  .cursor-arrow-main,
+  .cursor-arrow-glitch {
     display: none !important;
   }
 }
 
-.cursor-dot,
-.cursor-ring {
+.cursor-arrow-main,
+.cursor-arrow-glitch {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
   pointer-events: none;
-  border-radius: 50%;
+  will-change: transform;
+}
+.cursor-arrow-main {
+  color: var(--color-fg);
   mix-blend-mode: difference;
+  transition: color var(--dur-fast) var(--ease-brutal);
 }
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--color-fg);
-  transform: translate(-50%, -50%);
+.cursor-arrow-main.is-hovering {
+  color: var(--color-accent);
 }
-.cursor-ring {
-  width: 38px;
-  height: 38px;
-  border: var(--border-w) solid var(--color-fg);
-  transform: translate(-50%, -50%);
-  transition:
-    width var(--dur-fast) var(--ease-brutal),
-    height var(--dur-fast) var(--ease-brutal),
-    background var(--dur-fast) var(--ease-brutal),
-    border-color var(--dur-fast) var(--ease-brutal);
-}
-.cursor-ring.is-hovering {
-  width: 64px;
-  height: 64px;
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-}
-.cursor-ring.is-link {
-  width: 56px;
-  height: 56px;
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-}
-.cursor-arrow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  pointer-events: none;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 700;
-  color: #0a0a0a;
+.cursor-arrow-glitch {
   opacity: 0;
-  transition: opacity var(--dur-fast) var(--ease-brutal);
-  mix-blend-mode: normal;
+  mix-blend-mode: screen;
 }
-.cursor-arrow.visible {
-  opacity: 1;
+.cursor-arrow-red {
+  color: #ff003c;
 }
-.cursor-trail {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9998;
-  pointer-events: none;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.cursor-arrow-cyan {
+  color: #00e5ff;
 }
 
 /* ============================================================

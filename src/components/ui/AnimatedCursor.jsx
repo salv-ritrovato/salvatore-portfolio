@@ -1,13 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 
 const FINE_POINTER = '(hover: hover) and (pointer: fine)'
-const TRAIL_COUNT = 6
+
+const ARROW_PATH = 'M2,2 L2,18.5 L6.3,14.8 L9.2,21.2 L12.1,19.9 L9.2,13.5 L15,13.5 Z'
+
+function ArrowSvg() {
+  return (
+    <svg width="22" height="24" viewBox="0 0 22 24" fill="currentColor">
+      <path d={ARROW_PATH} />
+    </svg>
+  )
+}
 
 export default function AnimatedCursor() {
-  const dotRef = useRef(null)
-  const ringRef = useRef(null)
-  const arrowRef = useRef(null)
-  const trailRefs = useRef([])
+  const mainRef = useRef(null)
+  const ghostRRef = useRef(null)
+  const ghostCRef = useRef(null)
   const [enabled, setEnabled] = useState(
     () => typeof window !== 'undefined' && window.matchMedia(FINE_POINTER).matches,
   )
@@ -22,84 +30,63 @@ export default function AnimatedCursor() {
   useEffect(() => {
     if (!enabled) return
 
-    const dot = dotRef.current
-    const ring = ringRef.current
-    const arrow = arrowRef.current
-    const trails = trailRefs.current
-    if (!dot || !ring || !arrow) return
+    const main = mainRef.current
+    const ghostR = ghostRRef.current
+    const ghostC = ghostCRef.current
+    if (!main || !ghostR || !ghostC) return
 
     document.body.classList.add('has-custom-cursor')
 
     const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
-    const ringPos = { ...mouse }
-    const trailPositions = Array.from({ length: TRAIL_COUNT }, () => ({ ...mouse }))
+    const last = { ...mouse }
+    let velocity = { x: 0, y: 0 }
+    let glitch = 0
     let rafId
-    let isLink = false
 
     const onMove = (e) => {
       mouse.x = e.clientX
       mouse.y = e.clientY
-      dot.style.transform = `translate(${mouse.x}px, ${mouse.y}px) translate(-50%, -50%)`
     }
 
     const render = () => {
-      ringPos.x += (mouse.x - ringPos.x) * 0.18
-      ringPos.y += (mouse.y - ringPos.y) * 0.18
-      ring.style.transform = `translate(${ringPos.x}px, ${ringPos.y}px) translate(-50%, -50%)`
+      velocity.x = mouse.x - last.x
+      velocity.y = mouse.y - last.y
+      last.x = mouse.x
+      last.y = mouse.y
 
-      if (isLink) {
-        arrow.style.transform = `translate(${ringPos.x}px, ${ringPos.y}px) translate(-50%, -50%)`
-      }
+      const speed = Math.min(Math.hypot(velocity.x, velocity.y), 60)
+      glitch += (speed - glitch) * 0.35
 
-      trailPositions.forEach((pos, i) => {
-        const target = i === 0 ? mouse : trailPositions[i - 1]
-        pos.x += (target.x - pos.x) * (0.25 - i * 0.03)
-        pos.y += (target.y - pos.y) * (0.25 - i * 0.03)
-        const el = trails[i]
-        if (el) {
-          el.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%)`
-        }
-      })
+      main.style.transform = `translate(${mouse.x}px, ${mouse.y}px)`
+
+      const offX = -velocity.x * 0.5
+      const offY = -velocity.y * 0.5
+      ghostR.style.transform = `translate(${mouse.x + offX}px, ${mouse.y + offY}px)`
+      ghostC.style.transform = `translate(${mouse.x - offX}px, ${mouse.y - offY}px)`
+      const opacity = Math.min(glitch / 22, 0.85)
+      ghostR.style.opacity = opacity
+      ghostC.style.opacity = opacity
 
       rafId = requestAnimationFrame(render)
     }
     rafId = requestAnimationFrame(render)
 
     const onOver = (e) => {
-      const link = e.target.closest('a')
       const interactive = e.target.closest('a, button, input, textarea, select, [data-cursor="hover"]')
-      if (link) {
-        isLink = true
-        ring.classList.add('is-link')
-        arrow.classList.add('visible')
-        trails.forEach((t) => t && (t.style.opacity = '0.5'))
-      } else if (interactive) {
-        ring.classList.add('is-hovering')
-      }
+      if (interactive) main.classList.add('is-hovering')
     }
-
     const onOut = (e) => {
-      const link = e.target.closest('a')
       const interactive = e.target.closest('a, button, input, textarea, select, [data-cursor="hover"]')
-      if (link) {
-        isLink = false
-        ring.classList.remove('is-link')
-        arrow.classList.remove('visible')
-        trails.forEach((t) => t && (t.style.opacity = '0'))
-      } else if (interactive) {
-        ring.classList.remove('is-hovering')
-      }
+      if (interactive) main.classList.remove('is-hovering')
     }
 
     const onLeave = () => {
-      dot.style.opacity = '0'
-      ring.style.opacity = '0'
-      arrow.style.opacity = '0'
-      trails.forEach((t) => t && (t.style.opacity = '0'))
+      main.style.opacity = '0'
+      ghostR.style.opacity = '0'
+      ghostC.style.opacity = '0'
     }
     const onEnter = () => {
-      dot.style.opacity = '1'
-      ring.style.opacity = '1'
+      main.style.opacity = '1'
     }
 
     window.addEventListener('mousemove', onMove)
@@ -123,18 +110,15 @@ export default function AnimatedCursor() {
 
   return (
     <>
-      {Array.from({ length: TRAIL_COUNT }).map((_, i) => (
-        <div
-          key={i}
-          ref={(el) => (trailRefs.current[i] = el)}
-          className="cursor-trail"
-          aria-hidden="true"
-          style={{ opacity: 0, width: `${5 - i * 0.5}px`, height: `${5 - i * 0.5}px` }}
-        />
-      ))}
-      <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
-      <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
-      <div ref={arrowRef} className="cursor-arrow" aria-hidden="true">→</div>
+      <div ref={ghostCRef} className="cursor-arrow-glitch cursor-arrow-cyan" aria-hidden="true">
+        <ArrowSvg />
+      </div>
+      <div ref={ghostRRef} className="cursor-arrow-glitch cursor-arrow-red" aria-hidden="true">
+        <ArrowSvg />
+      </div>
+      <div ref={mainRef} className="cursor-arrow-main" aria-hidden="true">
+        <ArrowSvg />
+      </div>
     </>
   )
 }
