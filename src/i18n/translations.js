@@ -30,6 +30,8 @@ const shared = {
     { id: "npm", name: "npm", glyph: "np", category: "Tooling" },
     { id: "vscode", name: "VS Code", glyph: "{ }", category: "Editor" },
     { id: "cursor", name: "Cursor", glyph: "▸", category: "Editor" },
+    { id: "claude-code", name: "Claude Code", glyph: "AI", category: "AI Tool" },
+    { id: "learning", name: "Next.js & TypeScript", glyph: "▲", category: "Learning" },
   ],
   projectTech: {
     p1: [
