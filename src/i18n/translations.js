@@ -49,7 +49,7 @@ const shared = {
     p2: ["React", "JavaScript", "Tailwind", "CSS3"],
     p3: ["React", "JavaScript", "Tailwind", "CSS3"],
     p4: ["React", "Tailwind", "CSS3"],
-    p5: ["React", "JavaScript", "CSS3", "Tailwind"],
+    p5: ["Next.js", "TypeScript", "JavaScript", "CSS3", "Tailwind"],
   },
   projectLinks: {
     p1: {
