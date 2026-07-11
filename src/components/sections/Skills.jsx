@@ -33,6 +33,25 @@ export default function Skills() {
             </ScrollReveal>
           ))}
         </div>
+
+        {skills.learningItems?.length > 0 && (
+          <div className="mt-12">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-muted">
+              {skills.learningHeading}
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              {skills.learningItems.map((skill) => (
+                <span
+                  key={skill.id}
+                  className="inline-flex items-center gap-2 border-2 border-dashed border-line/40 px-4 py-2 font-mono text-sm font-bold uppercase tracking-wider text-muted"
+                >
+                  <span aria-hidden="true">{skill.glyph}</span>
+                  {skill.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )

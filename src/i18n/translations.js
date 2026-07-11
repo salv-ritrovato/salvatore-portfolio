@@ -31,7 +31,10 @@ const shared = {
     { id: "vscode", name: "VS Code", glyph: "{ }", category: "Editor" },
     { id: "cursor", name: "Cursor", glyph: "▸", category: "Editor" },
     { id: "claude-code", name: "Claude Code", glyph: "AI", category: "AI Tool" },
-    { id: "learning", name: "Next.js & TypeScript", glyph: "▲", category: "Learning" },
+  ],
+  learningItems: [
+    { id: "nextjs", name: "Next.js", glyph: "▲" },
+    { id: "typescript", name: "TypeScript", glyph: "TS" },
   ],
   projectTech: {
     p1: [
@@ -176,6 +179,8 @@ export const translations = {
       heading: "Stack & strumenti",
       description: "Le tecnologie con cui lavoro ogni giorno.",
       items: shared.skillsItems,
+      learningHeading: "In apprendimento",
+      learningItems: shared.learningItems,
     },
     projects: {
       index: "04 / WORK",
@@ -456,6 +461,8 @@ export const translations = {
       heading: "Stack & tools",
       description: "The technologies I work with every day.",
       items: shared.skillsItems,
+      learningHeading: "Currently learning",
+      learningItems: shared.learningItems,
     },
     projects: {
       index: "04 / WORK",
