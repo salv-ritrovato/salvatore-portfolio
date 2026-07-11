@@ -30,16 +30,6 @@ export default function Skills() {
               </div>
 
               <h3 className="font-display text-xl font-bold uppercase">{skill.name}</h3>
-
-              <div className="mt-4 h-1.5 w-full bg-line/20">
-                <span
-                  className="block h-full origin-left bg-accent transition-transform duration-700 ease-[var(--ease-brutal)]"
-                  style={{
-                    transform: `scaleX(${skill.level / 100})`,
-                  }}
-                />
-              </div>
-              <span className="mt-2 block font-mono text-xs text-muted">{skill.level}%</span>
             </ScrollReveal>
           ))}
         </div>
